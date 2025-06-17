@@ -1,0 +1,46 @@
+[2025-06-17 09:56:39] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 09:56:39] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 09:57:11] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 09:57:11] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 09:58:15] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 09:58:15] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 09:58:41] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 09:58:41] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:00:50] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:00:50] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:00:57] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:02:19] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:02:19] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:02:27] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:03:28] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:03:28] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:03:35] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:03:35] [INFO] [waymo_scene] [DEBUG] agent['position'] type: <class 'list'>, keys: ?
+[2025-06-17 10:04:36] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:04:36] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:04:43] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:04:43] [INFO] [waymo_scene] [DEBUG] agent['position'] type: <class 'list'>, keys: ?
+[2025-06-17 10:04:51] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:04:51] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:04:58] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:04:58] [INFO] [waymo_scene] [DEBUG] agent['position'] type: <class 'list'>, keys: ?
+[2025-06-17 10:05:31] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:05:31] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:05:38] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:05:38] [INFO] [waymo_scene] [DEBUG] agent['position'] type: <class 'list'>, keys: ?
+[2025-06-17 10:05:38] [INFO] [waymo_scene] [DEBUG] pos shape: (91,), valid shape: (91,)
+[2025-06-17 10:06:42] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:06:42] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:06:49] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:07:29] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:07:29] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:07:37] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:07:37] [INFO] [waymo_scene] [DEBUG] agent['position'] type: <class 'list'>, keys: ?
+[2025-06-17 10:07:37] [INFO] [waymo_scene] [DEBUG] pos shape: (91,), valid shape: (91,)
+[2025-06-17 10:08:04] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:08:04] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:08:12] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:08:12] [INFO] [waymo_scene] [DEBUG] agent['position'] type: <class 'list'>, keys: ?
+[2025-06-17 10:08:12] [INFO] [waymo_scene] [DEBUG] pos shape: (91,), valid shape: (91,)
+[2025-06-17 10:08:12] [INFO] [waymo_scene] [Agent 0] pos type: <class 'list'>, len: 91
+[2025-06-17 10:08:12] [INFO] [waymo_scene] [Agent 0] first pos entry: {'x': -10000.0, 'y': -10000.0}
