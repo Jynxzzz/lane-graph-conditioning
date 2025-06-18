@@ -39278,3 +39278,559 @@
 [2025-06-17 10:10:49] [INFO] [waymo_scene] [Agent 89] First pos entry: {'x': -10000.0, 'y': -10000.0}
 [2025-06-17 10:10:49] [INFO] [waymo_scene] [Agent 90] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
 [2025-06-17 10:10:49] [INFO] [waymo_scene] [Agent 90] First pos entry: {'x': 2585.750671610851, 'y': -340.29795844211986}
+[2025-06-17 10:17:46] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 10:17:46] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 0] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 1] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 1] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 2] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 2] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 3] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 3] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 4] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 4] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 5] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 5] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 6] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 6] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 7] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 7] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 8] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 8] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 9] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 9] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 10] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 10] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 11] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 11] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 12] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 12] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 13] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 13] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 14] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 14] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 15] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 15] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 16] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 16] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 17] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 17] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 18] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 18] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 19] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 19] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 20] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 20] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 21] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 21] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 22] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 22] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 23] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 23] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 24] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 24] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 25] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 25] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 26] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 26] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 27] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 27] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 28] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 28] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 29] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 29] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 30] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 30] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 31] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 31] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 32] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 32] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 33] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 33] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 34] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 34] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 35] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 35] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 36] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 36] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 37] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 37] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 38] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 38] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 39] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 39] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 40] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 40] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 41] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 41] First pos entry: {'x': 2654.470947265625, 'y': -360.7448425292969}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 42] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 42] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 43] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 43] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 44] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 44] First pos entry: {'x': 2617.675537109375, 'y': -348.5341796875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 45] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 45] First pos entry: {'x': 2620.971435546875, 'y': -332.4969482421875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 46] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 46] First pos entry: {'x': 2617.7666015625, 'y': -338.3194274902344}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 47] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 47] First pos entry: {'x': 2594.296142578125, 'y': -318.81988525390625}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 48] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 48] First pos entry: {'x': 2621.16748046875, 'y': -341.6645812988281}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 49] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 49] First pos entry: {'x': 2655.67431640625, 'y': -347.4010925292969}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 50] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 50] First pos entry: {'x': 2654.48046875, 'y': -351.48663330078125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 51] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 51] First pos entry: {'x': 2652.067626953125, 'y': -356.6867370605469}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 52] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 52] First pos entry: {'x': 2651.62939453125, 'y': -364.71820068359375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 53] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 53] First pos entry: {'x': 2646.768798828125, 'y': -310.4056396484375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 54] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 54] First pos entry: {'x': 2605.803466796875, 'y': -380.1649169921875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 55] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 55] First pos entry: {'x': 2662.160888671875, 'y': -337.96087646484375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 56] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 56] First pos entry: {'x': 2602.44873046875, 'y': -382.3870849609375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 57] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 57] First pos entry: {'x': 2642.384765625, 'y': -330.51007080078125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 58] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 58] First pos entry: {'x': 2646.3740234375, 'y': -305.157470703125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 59] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 59] First pos entry: {'x': 2627.450439453125, 'y': -283.02484130859375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 60] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 60] First pos entry: {'x': 2597.556396484375, 'y': -382.59405517578125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 61] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 61] First pos entry: {'x': 2631.5673828125, 'y': -327.0246887207031}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 62] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 62] First pos entry: {'x': 2553.73876953125, 'y': -321.7234191894531}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 63] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 63] First pos entry: {'x': 2588.0322265625, 'y': -387.15594482421875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 64] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 64] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 65] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 65] First pos entry: {'x': 2646.7294921875, 'y': -319.8119812011719}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 66] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 66] First pos entry: {'x': 2559.957763671875, 'y': -308.79345703125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 67] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 67] First pos entry: {'x': 2579.28857421875, 'y': -399.8655090332031}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 68] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 68] First pos entry: {'x': 2631.12255859375, 'y': -359.02734375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 69] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 69] First pos entry: {'x': 2591.109130859375, 'y': -371.42962646484375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 70] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 70] First pos entry: {'x': 2572.51611328125, 'y': -400.8433532714844}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 71] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 71] First pos entry: {'x': 2631.237060546875, 'y': -344.3934326171875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 72] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 72] First pos entry: {'x': 2631.339599609375, 'y': -376.18231201171875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 73] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 73] First pos entry: {'x': 2565.453857421875, 'y': -378.64031982421875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 74] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 74] First pos entry: {'x': 2572.1162109375, 'y': -409.0050048828125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 75] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 75] First pos entry: {'x': 2630.850341796875, 'y': -392.20941162109375}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 76] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 76] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 77] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 77] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 78] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 78] First pos entry: {'x': 2607.233642578125, 'y': -388.4686279296875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 79] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 79] First pos entry: {'x': 2552.69873046875, 'y': -398.8759765625}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 80] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 80] First pos entry: {'x': 2593.978271484375, 'y': -310.37335205078125}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 81] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 81] First pos entry: {'x': 2552.8115234375, 'y': -404.3758544921875}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 82] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 82] First pos entry: {'x': 2552.750244140625, 'y': -407.1021728515625}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 83] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 83] First pos entry: {'x': 2589.876953125, 'y': -293.4654235839844}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 84] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 84] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 85] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 85] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 86] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 86] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 87] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 87] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 88] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 88] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 89] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 89] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 90] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 10:17:53] [INFO] [waymo_scene] [Agent 90] First pos entry: {'x': 2585.750671610851, 'y': -340.29795844211986}
+[2025-06-17 18:09:20] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 18:09:20] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 0] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 1] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 1] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 2] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 2] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 3] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 3] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 4] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 4] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 5] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 5] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 6] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 6] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 7] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 7] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 8] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 8] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 9] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 9] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 10] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 10] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 11] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 11] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 12] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 12] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 13] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 13] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 14] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 14] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 15] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 15] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 16] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 16] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 17] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 17] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 18] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 18] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 19] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 19] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 20] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 20] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 21] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 21] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 22] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 22] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 23] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 23] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 24] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 24] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 25] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 25] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 26] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 26] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 27] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 27] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 28] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 28] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 29] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 29] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 30] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 30] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 31] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 31] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 32] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 32] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 33] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 33] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 34] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 34] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 35] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 35] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 36] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 36] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 37] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 37] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 38] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 38] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 39] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 39] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 40] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 40] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 41] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 41] First pos entry: {'x': 2654.470947265625, 'y': -360.7448425292969}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 42] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 42] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 43] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 43] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 44] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 44] First pos entry: {'x': 2617.675537109375, 'y': -348.5341796875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 45] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 45] First pos entry: {'x': 2620.971435546875, 'y': -332.4969482421875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 46] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 46] First pos entry: {'x': 2617.7666015625, 'y': -338.3194274902344}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 47] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 47] First pos entry: {'x': 2594.296142578125, 'y': -318.81988525390625}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 48] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 48] First pos entry: {'x': 2621.16748046875, 'y': -341.6645812988281}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 49] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 49] First pos entry: {'x': 2655.67431640625, 'y': -347.4010925292969}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 50] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 50] First pos entry: {'x': 2654.48046875, 'y': -351.48663330078125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 51] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 51] First pos entry: {'x': 2652.067626953125, 'y': -356.6867370605469}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 52] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 52] First pos entry: {'x': 2651.62939453125, 'y': -364.71820068359375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 53] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 53] First pos entry: {'x': 2646.768798828125, 'y': -310.4056396484375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 54] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 54] First pos entry: {'x': 2605.803466796875, 'y': -380.1649169921875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 55] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 55] First pos entry: {'x': 2662.160888671875, 'y': -337.96087646484375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 56] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 56] First pos entry: {'x': 2602.44873046875, 'y': -382.3870849609375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 57] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 57] First pos entry: {'x': 2642.384765625, 'y': -330.51007080078125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 58] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 58] First pos entry: {'x': 2646.3740234375, 'y': -305.157470703125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 59] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 59] First pos entry: {'x': 2627.450439453125, 'y': -283.02484130859375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 60] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 60] First pos entry: {'x': 2597.556396484375, 'y': -382.59405517578125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 61] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 61] First pos entry: {'x': 2631.5673828125, 'y': -327.0246887207031}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 62] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 62] First pos entry: {'x': 2553.73876953125, 'y': -321.7234191894531}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 63] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 63] First pos entry: {'x': 2588.0322265625, 'y': -387.15594482421875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 64] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 64] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 65] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 65] First pos entry: {'x': 2646.7294921875, 'y': -319.8119812011719}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 66] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 66] First pos entry: {'x': 2559.957763671875, 'y': -308.79345703125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 67] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 67] First pos entry: {'x': 2579.28857421875, 'y': -399.8655090332031}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 68] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 68] First pos entry: {'x': 2631.12255859375, 'y': -359.02734375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 69] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 69] First pos entry: {'x': 2591.109130859375, 'y': -371.42962646484375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 70] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 70] First pos entry: {'x': 2572.51611328125, 'y': -400.8433532714844}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 71] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 71] First pos entry: {'x': 2631.237060546875, 'y': -344.3934326171875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 72] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 72] First pos entry: {'x': 2631.339599609375, 'y': -376.18231201171875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 73] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 73] First pos entry: {'x': 2565.453857421875, 'y': -378.64031982421875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 74] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 74] First pos entry: {'x': 2572.1162109375, 'y': -409.0050048828125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 75] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 75] First pos entry: {'x': 2630.850341796875, 'y': -392.20941162109375}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 76] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 76] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 77] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 77] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 78] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 78] First pos entry: {'x': 2607.233642578125, 'y': -388.4686279296875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 79] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 79] First pos entry: {'x': 2552.69873046875, 'y': -398.8759765625}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 80] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 80] First pos entry: {'x': 2593.978271484375, 'y': -310.37335205078125}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 81] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 81] First pos entry: {'x': 2552.8115234375, 'y': -404.3758544921875}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 82] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 82] First pos entry: {'x': 2552.750244140625, 'y': -407.1021728515625}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 83] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 83] First pos entry: {'x': 2589.876953125, 'y': -293.4654235839844}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 84] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 84] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 85] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 85] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 86] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 86] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 87] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 87] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 88] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 88] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 89] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 89] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 90] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:09:27] [INFO] [waymo_scene] [Agent 90] First pos entry: {'x': 2585.750671610851, 'y': -340.29795844211986}
+[2025-06-17 18:27:57] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 18:27:57] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 0] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 0] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 1] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 1] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 2] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 2] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 3] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 3] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 4] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 4] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 5] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 5] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 6] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 6] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 7] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 7] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 8] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 8] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 9] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 9] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 10] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 10] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 11] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 11] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 12] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 12] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 13] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 13] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 14] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 14] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 15] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 15] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 16] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 16] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 17] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 17] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 18] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 18] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 19] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 19] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 20] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 20] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 21] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 21] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 22] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 22] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 23] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 23] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 24] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 24] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 25] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 25] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 26] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 26] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 27] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 27] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 28] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 28] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 29] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 29] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 30] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 30] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 31] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 31] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 32] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 32] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 33] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 33] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 34] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 34] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 35] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 35] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 36] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 36] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 37] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 37] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 38] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 38] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 39] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 39] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 40] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 40] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 41] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 41] First pos entry: {'x': 2654.470947265625, 'y': -360.7448425292969}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 42] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 42] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 43] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 43] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 44] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 44] First pos entry: {'x': 2617.675537109375, 'y': -348.5341796875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 45] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 45] First pos entry: {'x': 2620.971435546875, 'y': -332.4969482421875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 46] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 46] First pos entry: {'x': 2617.7666015625, 'y': -338.3194274902344}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 47] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 47] First pos entry: {'x': 2594.296142578125, 'y': -318.81988525390625}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 48] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 48] First pos entry: {'x': 2621.16748046875, 'y': -341.6645812988281}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 49] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 49] First pos entry: {'x': 2655.67431640625, 'y': -347.4010925292969}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 50] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 50] First pos entry: {'x': 2654.48046875, 'y': -351.48663330078125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 51] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 51] First pos entry: {'x': 2652.067626953125, 'y': -356.6867370605469}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 52] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 52] First pos entry: {'x': 2651.62939453125, 'y': -364.71820068359375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 53] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 53] First pos entry: {'x': 2646.768798828125, 'y': -310.4056396484375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 54] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 54] First pos entry: {'x': 2605.803466796875, 'y': -380.1649169921875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 55] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 55] First pos entry: {'x': 2662.160888671875, 'y': -337.96087646484375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 56] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 56] First pos entry: {'x': 2602.44873046875, 'y': -382.3870849609375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 57] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 57] First pos entry: {'x': 2642.384765625, 'y': -330.51007080078125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 58] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 58] First pos entry: {'x': 2646.3740234375, 'y': -305.157470703125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 59] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 59] First pos entry: {'x': 2627.450439453125, 'y': -283.02484130859375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 60] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 60] First pos entry: {'x': 2597.556396484375, 'y': -382.59405517578125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 61] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 61] First pos entry: {'x': 2631.5673828125, 'y': -327.0246887207031}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 62] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 62] First pos entry: {'x': 2553.73876953125, 'y': -321.7234191894531}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 63] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 63] First pos entry: {'x': 2588.0322265625, 'y': -387.15594482421875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 64] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 64] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 65] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 65] First pos entry: {'x': 2646.7294921875, 'y': -319.8119812011719}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 66] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 66] First pos entry: {'x': 2559.957763671875, 'y': -308.79345703125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 67] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 67] First pos entry: {'x': 2579.28857421875, 'y': -399.8655090332031}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 68] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 68] First pos entry: {'x': 2631.12255859375, 'y': -359.02734375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 69] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 69] First pos entry: {'x': 2591.109130859375, 'y': -371.42962646484375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 70] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 70] First pos entry: {'x': 2572.51611328125, 'y': -400.8433532714844}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 71] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 71] First pos entry: {'x': 2631.237060546875, 'y': -344.3934326171875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 72] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 72] First pos entry: {'x': 2631.339599609375, 'y': -376.18231201171875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 73] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 73] First pos entry: {'x': 2565.453857421875, 'y': -378.64031982421875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 74] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 74] First pos entry: {'x': 2572.1162109375, 'y': -409.0050048828125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 75] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 75] First pos entry: {'x': 2630.850341796875, 'y': -392.20941162109375}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 76] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 76] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 77] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 77] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 78] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 78] First pos entry: {'x': 2607.233642578125, 'y': -388.4686279296875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 79] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 79] First pos entry: {'x': 2552.69873046875, 'y': -398.8759765625}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 80] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 80] First pos entry: {'x': 2593.978271484375, 'y': -310.37335205078125}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 81] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 81] First pos entry: {'x': 2552.8115234375, 'y': -404.3758544921875}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 82] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 82] First pos entry: {'x': 2552.750244140625, 'y': -407.1021728515625}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 83] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 83] First pos entry: {'x': 2589.876953125, 'y': -293.4654235839844}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 84] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 84] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 85] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 85] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 86] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 86] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 87] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 87] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 88] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 88] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 89] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 89] First pos entry: {'x': -10000.0, 'y': -10000.0}
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 90] Keys: dict_keys(['position', 'width', 'length', 'heading', 'velocity', 'valid', 'type'])
+[2025-06-17 18:28:05] [INFO] [waymo_scene] [Agent 90] First pos entry: {'x': 2585.750671610851, 'y': -340.29795844211986}
+[2025-06-17 18:32:13] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 18:32:13] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])
+[2025-06-17 18:59:06] [INFO] [waymo_scene] Scene keys: dict_keys(['lane_graph', 'objects', 'av_idx'])
+[2025-06-17 18:59:06] [INFO] [waymo_scene] Lane graph keys: dict_keys(['lanes', 'pre_pairs', 'suc_pairs', 'left_pairs', 'right_pairs', 'road_edges', 'crosswalks', 'stop_signs'])

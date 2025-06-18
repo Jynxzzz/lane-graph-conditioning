@@ -78,3 +78,49 @@ plt.grid(True)
 plt.tight_layout()
 plt.savefig("scene_viz.png", dpi=300)
 plt.show()
+
+
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# 提取所有 agent 有效轨迹（预处理）
+agent_trajs = []
+for i, agent in enumerate(scene["objects"]):
+    if not isinstance(agent, dict):
+        continue
+    pos = agent.get("position", [])
+    valid = agent.get("valid", [])
+    if not pos or not valid:
+        continue
+    valid_mask = np.array(valid[: len(pos)]).astype(bool)
+    traj = [
+        (p["x"], p["y"]) if v and p["x"] > -9000 else None
+        for p, v in zip(pos, valid_mask)
+    ]
+    agent_trajs.append({"id": i, "is_ego": i == scene["av_idx"], "traj": traj})
+
+
+# 动画更新函数
+def update(frame_idx):
+    ax.clear()
+    ax.set_title(f"Waymo Frame {frame_idx}/90")
+    ax.axis("equal")
+    ax.grid(True)
+
+    for agent in agent_trajs:
+        traj = agent["traj"]
+        if frame_idx >= len(traj):
+            continue
+        point = traj[frame_idx]
+        if point is None:
+            continue
+        color = "blue" if agent["is_ego"] else "red"
+        size = 30 if agent["is_ego"] else 10
+        ax.scatter(point[0], point[1], c=color, s=size, alpha=0.8)
+
+
+ani = animation.FuncAnimation(fig, update, frames=90, interval=100)
+ani.save("scene_anim.gif", writer="pillow", dpi=150)
+plt.close()
