@@ -13,6 +13,35 @@ def draw_velocity_vector(ax, pos, vx, vy, w2e):
     ax.arrow(0, 0, dx, dy, fc="blue", ec="blue", alpha=0.6, zorder=4)
 
 
+def draw_traffic_lights(ax, traffic_lights, frame_idx, w2e):
+    if frame_idx >= len(traffic_lights):
+        return
+
+    state_color_map = {
+        1: "red",  # ARROW_STOP
+        2: "orange",  # ARROW_CAUTION
+        3: "green",  # ARROW_GO
+        4: "red",  # STOP
+        5: "orange",  # CAUTION
+        6: "green",  # GO
+        7: "red",  # FLASHING_STOP
+        8: "orange",  # FLASHING_CAUTION
+    }
+
+    for tls in traffic_lights[frame_idx]:
+        state = tls["state"]
+        stop_point = tls.get("stop_point")
+        if stop_point is None:
+            continue
+
+        color = state_color_map.get(state, "gray")
+        x, y = stop_point["x"], stop_point["y"]
+        px, py = w2e(x, y)
+
+        ax.plot(px, py, "o", color=color, markersize=8, alpha=0.7)
+        ax.text(px + 0.5, py + 0.5, f"{state}", fontsize=6, color=color)
+
+
 def draw_lane_graph(ax, lanes, w2e):
     for lane in lanes.values():
         pts = np.array(lane)[:, :2]

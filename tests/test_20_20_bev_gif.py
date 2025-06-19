@@ -2,6 +2,7 @@ import pickle
 
 import matplotlib.pyplot as plt
 import numpy as np
+from bev_renderer.lane_graph import draw_lane_graph, draw_lanes_near_sdc
 from jynxzzzdebug import debug_break, setup_logger
 
 # === 加载数据 ===
@@ -15,19 +16,6 @@ logger = setup_logger("waymo_scene", "logs/test.log")
 
 logger.info(f"Scene keys: {scene.keys()}")
 logger.info(f"Lane graph keys: {scene['lane_graph'].keys()}")
-
-
-def draw_lane_graph(ax, scene):
-    for crosswalk in scene["lane_graph"]["crosswalks"].values():
-        x = crosswalk[:, 0]
-        y = crosswalk[:, 1]
-        ax.fill(x, y, color="green", alpha=0.3)
-
-    for lane in scene["lane_graph"]["lanes"].values():
-        ax.plot(lane[:, 0], lane[:, 1], "k-", linewidth=0.5)
-
-    for edge in scene["lane_graph"]["road_edges"].values():
-        ax.plot(edge[:, 0], edge[:, 1], "b--", linewidth=0.5)
 
 
 import matplotlib.animation as animation
@@ -60,7 +48,8 @@ def update(frame_idx):
     ax.grid(True)
 
     # ==== Lane graph 背景图 ====
-    draw_lane_graph(ax, scene)
+    # draw_lane_graph(ax, scene)
+    draw_lanes_near_sdc(scene, ax, radius=30.0)
 
     # ==== Agent 动态轨迹 ====
     for agent in agent_trajs:
@@ -81,6 +70,6 @@ def update(frame_idx):
             ax.plot(xs, ys, color=color, alpha=0.3, linewidth=1)
 
 
-ani = animation.FuncAnimation(fig, update, frames=90, interval=100)
+ani = animation.FuncAnimation(fig, update, frames=1, interval=100)
 ani.save("lane_scene_anim.gif", writer="pillow", dpi=150)
 plt.close()
