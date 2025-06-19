@@ -10,31 +10,18 @@ from jynxzzzdebug import debug_break, setup_logger
 DEFAULT_SCENE_PATH = "/home/xingnan/VideoDataInbox/scenario_dreamer_waymo/train/training.tfrecord-00000-of-01000_5.pkl"
 
 
-def load_scene_data(list_path=None, base_dir=None):
-    """
-    如果提供 list_path → 从 list 中随机取一个加载
-    否则 → 从默认目录随机选一个加载
-    """
-    if list_path:
-        scene_list = load_selected_scene_list(list_path)
-        return load_random_scene_from_list(scene_list, base_dir or DEFAULT_SCENE_DIR)
-    else:
-        return load_random_scene(base_dir or DEFAULT_SCENE_DIR)
+def load_scene_data(path: Optional[str] = None) -> Dict:
+    """加载指定路径的 scene 数据，如果未指定则使用默认测试路径"""
+    path = path or DEFAULT_SCENE_PATH  # fallback
+    try:
+        with open(path, "rb") as f:
+            scene = pickle.load(f)
+        logging.info(f"✅ Loaded scene from: {path}")
+        return scene
+    except Exception as e:
+        logging.error(f"❌ Failed to load scene from {path}: {e}")
+        return {}
 
-
-#
-# def load_scene_data(path: Optional[str] = None) -> Dict:
-#     """加载指定路径的 scene 数据，如果未指定则使用默认测试路径"""
-#     path = path or DEFAULT_SCENE_PATH  # fallback
-#     try:
-#         with open(path, "rb") as f:
-#             scene = pickle.load(f)
-#         logging.info(f"✅ Loaded scene from: {path}")
-#         return scene
-#     except Exception as e:
-#         logging.error(f"❌ Failed to load scene from {path}: {e}")
-#         return {}
-#
 
 import logging
 import os
@@ -67,45 +54,6 @@ def load_random_scene(path: Optional[str] = None) -> Dict:
     except Exception as e:
         logging.error(f"❌ Error loading random scene from {scene_dir}: {e}")
         return {}
-
-
-def analyze_scenario_directory(path: Optional[str] = None):
-    stats = {
-        "total": 0,
-        "with_stop_sign": 0,
-        "with_traffic_light": 0,
-        "others": 0,
-        "corrupted": 0,
-    }
-
-    scene_dir = path or DEFAULT_SCENE_DIR
-
-    for fname in os.listdir(scene_dir):
-        if not fname.endswith(".pkl"):
-            continue
-
-        fpath = os.path.join(scene_dir, fname)
-        try:
-            with open(fpath, "rb") as f:
-                scenario = pickle.load(f)
-
-            stats["total"] += 1
-
-            has_stop = bool(scenario.get("lane_graph", {}).get("stop_signs"))
-            has_light = any(len(f) > 0 for f in scenario.get("traffic_lights", []))
-            # has_light = bool(scenario.get("traffic_lights"))
-
-            if has_light:
-                stats["with_traffic_light"] += 1
-            elif has_stop:
-                stats["with_stop_sign"] += 1
-            else:
-                stats["others"] += 1
-        except Exception as e:
-            logging.warning(f"❌ Failed to load {fname}: {e}")
-            stats["corrupted"] += 1
-
-    return stats
 
 
 def load_selected_scene_list(list_path: str) -> list:
