@@ -16,6 +16,9 @@ from _dev.render_frame import render_bev_frame
 # === 创建输出目录 ===
 output_dir = "test_rendered_frames"
 os.makedirs(output_dir, exist_ok=True)
+import random
+
+random.seed(42)  # ✅ 全局可复现
 # load random scene
 # scenario= load_scene_data()
 # # 加载 green-only 列表

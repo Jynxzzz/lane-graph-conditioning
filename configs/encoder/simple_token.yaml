@@ -1,0 +1,10 @@
+# configs/encoder/simple_token.yaml
+defaults:
+  - _self_
+
+# 让这个 config 注入到 cfg.encoder 下
+# @package _group_
+
+name: simple_token
+max_len: 128
+vocab_size: 1024

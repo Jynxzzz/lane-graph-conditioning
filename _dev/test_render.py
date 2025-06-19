@@ -5,7 +5,7 @@ import pickle
 
 from jynxzzzdebug import debug_break, debug_print, explore_dict, setup_logger
 from tools.debug_scene_structure import explore_scene, print_scene_structure
-from tools.loading_one_sceneario import load_random_scene, load_scene_data
+from tools.scene_loader import load_random_scene, load_scene_data
 
 from _dev.render_frame import render_bev_frame
 
@@ -16,10 +16,10 @@ os.makedirs(output_dir, exist_ok=True)
 scenario = load_random_scene()
 
 
-print_scene_structure(scenario, frame_idx=0)
-debug_break()
+# print_scene_structure(scenario, frame_idx=0)
+# debug_break()
 debug_print("=== Debugging scene structure ===", "begin!")
-explore_scene(scenario, frame_idx=0)
+# explore_scene(scenario, frame_idx=0)
 # explore_dict(scenario)
 
 

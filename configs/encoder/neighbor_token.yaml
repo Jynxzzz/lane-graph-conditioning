@@ -1,0 +1,9 @@
+# @package encoder
+defaults:
+  - base
+
+name: neighbor_token
+
+include_lanes: true
+include_vehicles: true
+neighbor_depth: 1

@@ -1,0 +1,8 @@
+# @package encoder
+defaults:
+  - base
+
+name: latent_path_token
+
+include_path_info: true
+attention_mask: true

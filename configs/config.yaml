@@ -1,0 +1,10 @@
+defaults:
+  - encoder: simple_token
+  # - extractor: default
+  - _self_
+
+# 可选的 seed 控制（用于场景选择等）
+seed: 42
+
+# 数据路径（也可以做成 config）
+scene_list_path: "/home/xingnan/scenario-dreamer/green_only_list.txt"

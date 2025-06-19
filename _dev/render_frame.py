@@ -4,13 +4,16 @@ import math
 
 import matplotlib.pyplot as plt
 import numpy as np
+from jynxzzzdebug import debug_break, debug_print, explore_dict, setup_logger
 from matplotlib.patches import Circle, Rectangle
 from matplotlib.transforms import Affine2D
+
+from _dev.encoder_debug import encode_lanes_debug
 
 # ✅ 完整版 render_bev_frame.py + 正确 heading 对齐逻辑
 
 
-logging.basicConfig(level=logging.INFO)
+logging = setup_logger("render_frame", "logs/render_frame.log")
 
 
 def world_to_ego(points, ego_pos, ego_heading_deg):
@@ -99,6 +102,10 @@ def extract_ego_info(scene, frame_idx):
 
 
 def build_local_transform(ego_pos, heading_deg):
+    logging.info(
+        f"[DEBUG] Building local transform for ego at {ego_pos} with heading {heading_deg}°"
+    )
+
     def w2e(points):
         return world_to_ego(points, ego_pos, heading_deg)
 
@@ -140,7 +147,7 @@ def draw_velocity_vector(ax, ego, ego_pos, w2e):
 
 
 def draw_heading_vector(ax, ego_pos, heading_deg, w2e):
-    print(
+    logging.info(
         f"[DEBUG draw_heading_vector] heading_deg = {heading_deg}, type = {type(heading_deg)}"
     )
     heading_rad = math.radians(heading_deg)
@@ -191,22 +198,37 @@ def draw_agents(ax, agents, av_idx, frame_idx, w2e):
             logging.warning(f"agent {i} skipped: {e}")
 
 
-def draw_ego_box(ax, w2e):
-    ego_length, ego_width = 4.8, 2.0
-    vec = np.array([1.0, 0.0])
-    theta = math.atan2(vec[1], vec[0])
-    transform = Affine2D().rotate_around(0, 0, theta)
+# 所有 lane/agent 都已经经过 w2e 转换
+# 那我们只需要画一个朝 +x 方向的蓝框
+def draw_ego_box(ax, length=4.8, width=2.0):
     rect = Rectangle(
-        (-ego_length / 2, -ego_width / 2),
-        ego_length,
-        ego_width,
+        (-width / 2, -length / 2),  # 横向是短边，纵向是长边
+        width,  # ➡️ x 方向：2.0m
+        length,  # ⬆️ y 方向：4.8m
         edgecolor="blue",
         facecolor="none",
         linewidth=1.5,
         zorder=3,
     )
-    rect.set_transform(transform + ax.transData)
     ax.add_patch(rect)
+
+
+# def draw_ego_box(ax, w2e):
+#     ego_length, ego_width = 4.8, 2.0
+#     vec = np.array([1.0, 0.0])
+#     theta = math.atan2(vec[1], vec[0])
+#     transform = Affine2D().rotate_around(0, 0, theta)
+#     rect = Rectangle(
+#         (-ego_length / 2, -ego_width / 2),
+#         ego_length,
+#         ego_width,
+#         edgecolor="blue",
+#         facecolor="none",
+#         linewidth=1.5,
+#         zorder=3,
+#     )
+#     rect.set_transform(transform + ax.transData)
+#     ax.add_patch(rect)
 
 
 def draw_outer_circle(ax, radius):
@@ -224,20 +246,116 @@ def save_canvas(fig, save_path):
     print(f"✅ BEV 渲染完成：{save_path}")
 
 
-def render_bev_frame(scene, frame_idx=0, radius=50.0, save_path="bev_debug.png"):
+# visualize_utils.py
+import matplotlib.pyplot as plt
+
+
+def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50):
+    for lane_id, lane_pts in lane_graph.get("lanes", {}).items():
+        token = lane_token_map.get(lane_id)
+        if token is None:
+            continue
+
+        lane_pts = np.array(lane_pts)
+        if lane_pts.ndim != 2 or lane_pts.shape[0] == 0 or lane_pts.shape[1] < 2:
+            logging.warning(
+                f"[draw_lane_tokens] lane {lane_id} → 非法坐标 shape {lane_pts.shape}"
+            )
+            continue
+
+        if w2e is not None:
+            try:
+                transformed_pts = w2e(lane_pts[:, :2])
+            except Exception as e:
+                logging.error(f"[❌ ERROR] lane {lane_id} transform failed: {e}")
+                continue
+
+            if transformed_pts.ndim != 2 or transformed_pts.shape[0] == 0:
+                logging.warning(
+                    f"[⚠️ skipped] lane {lane_id} transformed result invalid: shape={transformed_pts.shape}"
+                )
+                continue
+
+            lane_pts = transformed_pts
+
+        xs, ys = lane_pts[:, 0], lane_pts[:, 1]
+        mid = len(xs) // 2
+        ax.plot(xs, ys, linewidth=1, color="gray", alpha=0.6)
+
+        # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
+        if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
+            try:
+                ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
+            except Exception as e:
+                logging.warning(
+                    f"[text skipped] lane {lane_id} token render error: {e}"
+                )
+
+
+# def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6):
+#     for lane_id, lane_pts in lane_graph.get("lanes", {}).items():
+#         token = lane_token_map.get(lane_id)
+#         if token is None:
+#             continue
+#         lane_pts = np.array(lane_pts)
+#         logging.info(f"[draw_lane_tokens] lane {lane_id} has token {token}")
+#         if lane_pts.ndim != 2 or lane_pts.shape[0] == 0 or lane_pts.shape[1] < 2:
+#             logging.warning(
+#                 f"[draw_lane_tokens] lane {lane_id} → 非法坐标 shape {lane_pts.shape}"
+#             )
+#             continue
+#         if w2e is not None:
+#             logging.info(f"[draw_lane_tokens] lane {lane_id} w2e transform")
+#             try:
+#                 transformed_pts = w2e(lane_pts[:, :2])
+#                 logging.info(
+#                     f"[draw_lane_tokens] lane {lane_id} transformed shape: {transformed_pts.shape}"
+#                 )
+#             except Exception as e:
+#                 logging.error(f"[❌ ERROR] lane {lane_id} transform failed: {e}")
+#                 continue
+#
+#             if transformed_pts.ndim != 2 or transformed_pts.shape[0] == 0:
+#                 logging.warning(
+#                     f"[⚠️ skipped] lane {lane_id} transformed result invalid: shape={transformed_pts.shape}"
+#                 )
+#                 continue
+#
+#             lane_pts = transformed_pts
+#         xs, ys = lane_pts[:, 0], lane_pts[:, 1]
+#         mid = len(xs) // 2
+#         ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
+#         ax.plot(xs, ys, linewidth=1, color="gray", alpha=0.6)
+
+
+def render_bev_frame(
+    scene, frame_idx=0, radius=50.0, save_path="bev_debug.png", mode="default"
+):
+
     fig, ax = init_canvas(frame_idx, radius)
     ego, ego_pos, ego_heading_deg = extract_ego_info(scene, frame_idx)
     w2e = build_local_transform(ego_pos, ego_heading_deg)
 
     draw_velocity_vector(ax, ego, ego_pos, w2e)
     draw_heading_vector(ax, ego_pos, ego_heading_deg, w2e)
-    draw_ego_box(ax, w2e)
+    draw_ego_box(ax)
     draw_lanes(ax, scene.get("lane_graph", {}), w2e)
     draw_agents(ax, scene.get("objects", []), scene["av_idx"], frame_idx, w2e)
+
+    draw_lane_tokens(
+        ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e
+    )
 
     draw_outer_circle(ax, radius)
     logging.info(f"traffic lights: {scene.get('traffic_lights', [])}")
     draw_traffic_lights(ax, scene.get("traffic_lights", []), frame_idx, w2e)
+    # if mode == "encode":
+    #     fig, ax = plt.subplots(figsize=(8, 8))  # 💡 新增画布
+    #     tokens = encode_lanes_debug(scene["lane_graph"], w2e, ax=ax)
+    #     print(f"👁️ Lane tokens: {tokens}")
+    #     plt.axis("equal")  # optional：保持比例
+    #     plt.title("Lane Token Visualization")
+    #     plt.show()  # 💡 不要忘记展示
 
     save_canvas(fig, save_path)
 

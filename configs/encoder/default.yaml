@@ -1,0 +1,5 @@
+# @package extractor
+
+enabled: true
+sdc_radius: 50   # 以 SDC 为中心抽取 N 米范围世界
+filter_empty: true

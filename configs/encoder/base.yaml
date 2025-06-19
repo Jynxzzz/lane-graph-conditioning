@@ -1,0 +1,4 @@
+# 所有 encoder 的共通设置
+max_len: 512
+vocab_size: 2500
+pad_token: 0
