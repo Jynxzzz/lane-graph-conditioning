@@ -59,6 +59,8 @@ def init_canvas(frame_idx, radius):
 
 
 def extract_ego_info(scene, frame_idx):
+    debug_print("extract_ego_info", "start extracting ego info")
+
     ego = scene["objects"][scene["av_idx"]]
 
     # === 提取坐标 ===
@@ -171,14 +173,64 @@ def draw_heading_vector(ax, ego_pos, heading_deg, w2e):
     )
 
 
-def draw_lanes(ax, lane_graph, w2e):
-    for lane in lane_graph.get("lanes", {}).values():
+def draw_lanes(ax, lane_graph, w2e, lane_token_map=None):
+    for lane_id, lane in lane_graph.get("lanes", {}).items():
         try:
             pts = np.array(lane)[:, :2]
             local = w2e(pts)
             ax.plot(local[:, 0], local[:, 1], "k-", linewidth=0.5, zorder=1)
+
+            if local.shape[0] == 0:
+                continue
+
+            # === 起点位置（文本 anchor）
+            x, y = local[0]
+
+            # === 显示 lane id
+            # ax.text(
+            #     x,
+            #     y + 0.5,
+            #     f"{lane_id}",
+            #     fontsize=5,
+            #     color="black",
+            #     ha="center",
+            #     va="center",
+            #     bbox=dict(
+            #         facecolor="white",
+            #         alpha=0.6,
+            #         edgecolor="none",
+            #         boxstyle="round,pad=0.1",
+            #     ),
+            #     zorder=5,
+            # )
+
+            # # === 显示 token，如果有
+            # if lane_token_map and lane_id in lane_token_map:
+            #     token = lane_token_map[lane_id]
+            #     ax.text(
+            #         x,
+            #         y + 1.0,
+            #         f"t{token}",
+            #         fontsize=5,
+            #         color="red",
+            #         ha="center",
+            #         va="center",
+            #         bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
+            #         zorder=5,
+            #     )
+
         except Exception as e:
-            logging.warning(f"❌ Lane drawing error: {e}")
+            logging.warning(f"❌ Lane {lane_id} drawing error: {e}")
+
+
+# def draw_lanes(ax, lane_graph, w2e):
+#     for lane in lane_graph.get("lanes", {}).values():
+#         try:
+#             pts = np.array(lane)[:, :2]
+#             local = w2e(pts)
+#             ax.plot(local[:, 0], local[:, 1], "k-", linewidth=0.5, zorder=1)
+#         except Exception as e:
+#             logging.warning(f"❌ Lane drawing error: {e}")
 
 
 def draw_agents(ax, agents, av_idx, frame_idx, w2e):
@@ -250,7 +302,7 @@ def save_canvas(fig, save_path):
 import matplotlib.pyplot as plt
 
 
-def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50):
+def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50.0):
     for lane_id, lane_pts in lane_graph.get("lanes", {}).items():
         token = lane_token_map.get(lane_id)
         if token is None:
@@ -265,31 +317,127 @@ def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radiu
 
         if w2e is not None:
             try:
-                transformed_pts = w2e(lane_pts[:, :2])
+                lane_pts = w2e(lane_pts[:, :2])
             except Exception as e:
                 logging.error(f"[❌ ERROR] lane {lane_id} transform failed: {e}")
                 continue
 
-            if transformed_pts.ndim != 2 or transformed_pts.shape[0] == 0:
-                logging.warning(
-                    f"[⚠️ skipped] lane {lane_id} transformed result invalid: shape={transformed_pts.shape}"
-                )
-                continue
-
-            lane_pts = transformed_pts
-
+        # 画 lane 曲线
         xs, ys = lane_pts[:, 0], lane_pts[:, 1]
         mid = len(xs) // 2
         ax.plot(xs, ys, linewidth=1, color="gray", alpha=0.6)
 
-        # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
-        if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
+        x, y = lane_pts[0, 0], lane_pts[0, 1]  # 起点位置作为 anchor
+
+        # 🛡️ 安全范围内才显示 text
+        if abs(x) < radius and abs(y) < radius:
             try:
-                ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
+                # === 上方：显示 lane_id
+                ax.text(
+                    x,
+                    y + 1.0,
+                    f"{lane_id}",
+                    fontsize=6,
+                    color="black",
+                    ha="center",
+                    va="center",
+                    bbox=dict(
+                        facecolor="white",
+                        alpha=0.6,
+                        edgecolor="gray",
+                        boxstyle="round,pad=0.2",
+                    ),
+                    zorder=5,
+                )
+
+                # === 下方：显示 token
+                ax.text(
+                    x,
+                    y - 1.7,
+                    f"t{token}",
+                    fontsize=7,
+                    color="blue",
+                    ha="center",
+                    va="center",
+                    bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
+                    zorder=5,
+                )
             except Exception as e:
                 logging.warning(
-                    f"[text skipped] lane {lane_id} token render error: {e}"
+                    f"[text skipped] lane {lane_id} label render error: {e}"
                 )
+
+
+# def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50):
+#     for lane_id, lane_pts in lane_graph.get("lanes", {}).items():
+#         token = lane_token_map.get(lane_id)
+#         if token is None:
+#             continue
+#
+#         lane_pts = np.array(lane_pts)
+#         if lane_pts.ndim != 2 or lane_pts.shape[0] == 0 or lane_pts.shape[1] < 2:
+#             logging.warning(
+#                 f"[draw_lane_tokens] lane {lane_id} → 非法坐标 shape {lane_pts.shape}"
+#             )
+#             continue
+#
+#         if w2e is not None:
+#             try:
+#                 transformed_pts = w2e(lane_pts[:, :2])
+#             except Exception as e:
+#                 logging.error(f"[❌ ERROR] lane {lane_id} transform failed: {e}")
+#                 continue
+#
+#             if transformed_pts.ndim != 2 or transformed_pts.shape[0] == 0:
+#                 logging.warning(
+#                     f"[⚠️ skipped] lane {lane_id} transformed result invalid: shape={transformed_pts.shape}"
+#                 )
+#                 continue
+#
+#             lane_pts = transformed_pts
+#         # 显示 lane id（上方偏移 + 黑色）
+#         x, y = lane_pts[0, 0], lane_pts[0, 1]  # 起点位置
+#         ax.text(
+#             x,
+#             y + 1.0,
+#             f"{lane_id}",
+#             fontsize=6,
+#             color="black",
+#             ha="center",
+#             va="center",
+#             bbox=dict(
+#                 facecolor="white", alpha=0.6, edgecolor="gray", boxstyle="round,pad=0.2"
+#             ),
+#             zorder=5,
+#         )
+#
+#         # 显示 token（下方偏移 + 蓝色）
+#         if lane_token_map and lane_id in lane_token_map:
+#             token = lane_token_map[lane_id]
+#             ax.text(
+#                 x,
+#                 y - 1.7,
+#                 f"t{token}",
+#                 fontsize=7,  # 稍大点
+#                 color="blue",
+#                 ha="center",
+#                 va="center",
+#                 bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
+#                 zorder=5,
+#             )
+#         xs, ys = lane_pts[:, 0], lane_pts[:, 1]
+#         mid = len(xs) // 2
+#         ax.plot(xs, ys, linewidth=1, color="gray", alpha=0.6)
+#
+#         # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
+#         # if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
+#         #     try:
+#         #         ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
+#         #     except Exception as e:
+#         #         logging.warning(
+#         #             f"[text skipped] lane {lane_id} token render error: {e}"
+#         #         )
+#         radius = 50.0  # 你可以传进来作为参数
 
 
 # def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6):
@@ -339,7 +487,12 @@ def render_bev_frame(
     draw_velocity_vector(ax, ego, ego_pos, w2e)
     draw_heading_vector(ax, ego_pos, ego_heading_deg, w2e)
     draw_ego_box(ax)
-    draw_lanes(ax, scene.get("lane_graph", {}), w2e)
+    draw_lanes(
+        ax,
+        scene.get("lane_graph", {}),
+        w2e,
+        lane_token_map=scene.get("lane_token_map", {}),
+    )
     draw_agents(ax, scene.get("objects", []), scene["av_idx"], frame_idx, w2e)
 
     draw_lane_tokens(

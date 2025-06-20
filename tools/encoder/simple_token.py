@@ -41,7 +41,14 @@ class SimpleEncoder:
 
         w2e = build_local_transform(ego_pos, ego_heading)
         logging.info(f"[ENCODE] world to ego transform: {w2e}")
+        graph = scenario.get("lane_graph", {})
         lane_graph = scenario.get("lane_graph", {}).get("lanes", {})
+
+        debug_print(
+            "=== Debugging  graph structure ===",
+            explore_dict(graph, max_depth=1),
+        )
+        # debug_break("[DEBUG] Break to inspect lane graph structure")
         logging.info(f"[ENCODE] lane_graph has {len(lane_graph)} lanes")
 
         for lane_id, lane_pts in lane_graph.items():

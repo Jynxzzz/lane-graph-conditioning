@@ -48,12 +48,16 @@ def plot_lane_graph(scene, frame_idx=0, radius=50.0, save_path="lane_debug.png")
     draw_heading_vector(ax, ego_pos, ego_heading_deg, w2e)
 
     draw_agents(ax, scene.get("objects", []), scene["av_idx"], frame_idx, w2e)
+    logging.info(
+        f"Frame {frame_idx} | Ego Pos = {ego_pos}, Heading = {ego_heading_deg:.2f}°"
+    )
 
     draw_lane_tokens(
         ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e
     )
 
     draw_outer_circle(ax, radius)
+
     logging.info(f"traffic lights: {scene.get('traffic_lights', [])}")
     draw_traffic_lights(ax, scene.get("traffic_lights", []), frame_idx, w2e)
     # === 获取车道结构
@@ -71,20 +75,21 @@ def plot_lane_graph(scene, frame_idx=0, radius=50.0, save_path="lane_debug.png")
         ax.plot(xs, ys, linestyle="-", linewidth=1.2)
 
         # 画上 token_id 作为标签
-        token_id = lane_token_map.get(lane_id, None)
-        if token_id is not None:
-            mid = len(xs) // 2
-            # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
-            if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
-                try:
-                    ax.text(xs[mid], ys[mid], str(token_id), fontsize=6, color="blue")
-                    # ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
-                except Exception as e:
-                    logging.warning(
-                        f"[text skipped] lane {lane_id} token render error: {e}"
-                    )
+        # token_id = lane_token_map.get(lane_id, None)
+        # if token_id is not None:
+        #     mid = len(xs) // 2
+        #     # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
+        #     if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
+        #         try:
+        #             ax.text(xs[mid], ys[mid], str(token_id), fontsize=6, color="blue")
+        #             # ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
+        #         except Exception as e:
+        #             logging.warning(
+        #                 f"[text skipped] lane {lane_id} token render error: {e}"
+        #             )
 
     # === 保存图像
     if save_path:
         plt.savefig(save_path, dpi=150)
         plt.close()
+    print(f"Lane graph saved to {save_path}")
