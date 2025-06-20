@@ -81,20 +81,55 @@ def find_all_sucs_and_neighbors(lane_graph, ego_lane_id, max_hops=2):
     return G
 
 
-def build_waterflow_graph(lane_graph, ego_lane_id, max_hops=2):
+def build_waterflow_graph(lane_graph, ego_lane_id):
     G = nx.DiGraph()
+    stages = []  # 🌊 每一帧的 node 列表
+    visited = set()
+
+    # 初始节点：ego
+    current_level = [ego_lane_id]
+    visited.add(ego_lane_id)
     G.add_node(ego_lane_id)
+    stages.append([ego_lane_id])  # 第0帧
 
-    # === Stage 1: 上游 predecessor → ego
-    preds = find_all_preds(lane_graph, ego_lane_id, max_hops=max_hops)
-    for p in preds:
-        G.add_edge(p, ego_lane_id, type="pre")
+    for step in range(3):  # 控制扩张步数，可调
+        next_level = []
+        this_stage = []
+        for node in current_level:
+            for succ in lane_graph["suc_pairs"].get(node, []):
+                if succ not in visited:
+                    G.add_edge(node, succ, type="sdc_to_suc")
+                    visited.add(succ)
+                    this_stage.append(succ)
 
-    # === Stage 2: ego → successors + neighbors
-    G_suc = find_all_sucs_and_neighbors(lane_graph, ego_lane_id, max_hops=max_hops)
-    G.update(G_suc)
+            for side in ["left_pairs", "right_pairs"]:
+                for side_id in lane_graph[side].get(node, []):
+                    if side_id not in visited:
+                        G.add_edge(node, side_id, type=f"sdc_to_{side[:4]}")
+                        visited.add(side_id)
+                        this_stage.append(side_id)
 
-    return G
+        if this_stage:
+            stages.append(this_stage)
+        current_level = this_stage
+
+    return G, stages
+
+
+# def build_waterflow_graph(lane_graph, ego_lane_id, max_hops=2):
+#     G = nx.DiGraph()
+#     G.add_node(ego_lane_id)
+#
+#     # === Stage 1: 上游 predecessor → ego
+#     preds = find_all_preds(lane_graph, ego_lane_id, max_hops=max_hops)
+#     for p in preds:
+#         G.add_edge(p, ego_lane_id, type="pre")
+#
+#     # === Stage 2: ego → successors + neighbors
+#     G_suc = find_all_sucs_and_neighbors(lane_graph, ego_lane_id, max_hops=max_hops)
+#     G.update(G_suc)
+#
+#     return G
 
 
 def build_directional_graph(lane_graph, ego_lane_id):

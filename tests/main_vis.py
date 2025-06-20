@@ -33,6 +33,7 @@ from tools.scene_loader import (
     load_scene_data,
     load_selected_scene_list,
 )
+from utils.graph_pop_animation import animate_graph_growth
 
 random.seed(42)  # ✅ 全局可复现
 # load random scene
@@ -84,7 +85,11 @@ def main(cfg: DictConfig):
     G = build_lane_graph(scenario)
     G_full = G
     G_sub = build_waterflow_graph(scenario["lane_graph"], ego_lane_id)
-    # G_sub = extract_ego_subgraph(scenario["lane_graph"], ego_lane_id, max_hops=3)
+    G_sub, node_stages = build_waterflow_graph(scenario["lane_graph"], ego_lane_id)
+    pos = nx.spring_layout(G_sub, seed=42)
+    # 调用生成动画函数
+    # animate_graph_growth(G_sub, pos, node_stages, save_path="lane_wave.gif")
+    # debug_break("=== Debugging lane graph structure ===")
     pos = {}
     for lane_id in G.nodes:
         lane_pts = scenario["lane_graph"]["lanes"].get(lane_id)
@@ -92,9 +97,6 @@ def main(cfg: DictConfig):
             local_pts = w2e(lane_pts[:, :2])
             pos[lane_id] = tuple(local_pts[0])  # ✅ now in SDC-centered coord
     nearby_ids = get_nearby_lane_ids(scenario["lane_graph"], w2e, radius=25.0)
-
-    # step2: 用新方法提取合法路径的 G_sub
-    # G_sub = G_full.subgraph(nearby_ids).copy()
 
     plot_lane_graph_dual(
         G_full,

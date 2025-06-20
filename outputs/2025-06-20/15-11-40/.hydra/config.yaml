@@ -1,0 +1,7 @@
+encoder:
+  name: simple_token
+  max_len: 128
+  vocab_size: 1024
+seed: 42
+base_dir: /home/xingnan/VideoDataInbox/scenario_dreamer_waymo/train
+scene_list_path: /home/xingnan/scenario-dreamer/green_only_list.txt

@@ -7,4 +7,8 @@ defaults:
 seed: 42
 
 # 数据路径（也可以做成 config）
-scene_list_path: "/home/xingnan/scenario-dreamer/green_only_list.txt"
+scene:
+  base_dir: "/home/xingnan/VideoDataInbox/scenario_dreamer_waymo/train"
+
+
+  scene_list_path: "/home/xingnan/scenario-dreamer/green_only_list.txt"
