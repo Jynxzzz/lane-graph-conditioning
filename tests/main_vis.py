@@ -7,12 +7,11 @@ import hydra
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
-from jynxzzzdebug import debug_break, debug_print, explore_dict, setup_logger
-from omegaconf import DictConfig, OmegaConf
-
 from _dev.candy_lane_graph import extract_ego_info, plot_lane_graph
 from _dev.ego_utils import build_ego_centered_context
 from _dev.render_frame import build_local_transform, render_bev_frame
+from jynxzzzdebug import debug_break, debug_print, explore_dict, setup_logger
+from omegaconf import DictConfig, OmegaConf
 from tools.debug_scene_structure import explore_scene, print_scene_structure
 
 # 调用 encoder
@@ -121,7 +120,7 @@ def main(cfg: DictConfig):
             #     scenario, frame_idx=frame_idx, save_path=save_path, mode="encode"
             # )
             # render_bev_frame(scenario, frame_idx=frame_idx, save_path=save_path)
-            # plot_lane_graph(scenario, frame_idx=frame_idx, save_path=save_path)
+            plot_lane_graph(scenario, frame_idx=frame_idx, save_path=save_path)
         except Exception as e:
             print(f"[❌ ERROR] Failed at frame {frame_idx}: {e}")
 
