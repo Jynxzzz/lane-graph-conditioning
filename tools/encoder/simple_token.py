@@ -25,57 +25,152 @@ from utils.utils2tokens import angle2token, compute_lane_heading
 
 logging = setup_logger("simple_token", "logs/simple_token.log")
 
+from dataclasses import dataclass, field
+from typing import List, Optional
 
-class SimpleEncoder:
+import numpy as np
+from tools.encoder.base_encoder import BaseEncoder  # ← 引入我们刚刚写的抽象类
+from tools.encoder.token_types import LaneToken, TrafficLightToken
+
+
+class SimpleEncoder(BaseEncoder):
     def __init__(self, max_len=128, vocab_size=1024, discretize_bins=16, radius=50.0):
         self.max_len = max_len
         self.vocab_size = vocab_size
         self.discretize_bins = discretize_bins
         self.radius = radius
 
-    def encode(self, scenario, cfg):
+    def encode_lanes(self, scene):
+        return self._encode_lanes_impl(scene)
+
+    def encode_traffic_lights(self, scene, frame_idx):
+        return self._encode_traffic_lights_impl(scene, frame_idx)
+
+    def encode_agents(self, scene, frame_idx):
+        return self._encode_agents_impl(scene, frame_idx)
+
+    def _encode_lanes_impl(self, scene):
         tokens = []
         lane_token_map = {}
-        ego, ego_pos, ego_heading = extract_ego_info(scenario, frame_idx=0)
 
+        # === 1. 提取 ego 信息与 BEV 变换
+        ego, ego_pos, ego_heading = extract_ego_info(scene, frame_idx=0)
         w2e = build_local_transform(ego_pos, ego_heading)
-        # 在调用 safe_draw_lane_graph 前加上
         sdc_xy = np.array([ego_pos[0], ego_pos[1]])
-        ego_lane_id = find_ego_lane_id(sdc_xy, scenario["lane_graph"])
-        G, _ = build_waterflow_graph(scenario["lane_graph"], ego_lane_id)
 
-        lane_graph = scenario.get("lane_graph", {}).get("lanes", {})
+        # === 2. 找到 ego 所在 lane
+        ego_lane_id = find_ego_lane_id(sdc_xy, scene["lane_graph"])
 
-        # debug_break("[DEBUG] Break to inspect lane graph structure")
+        # === 3. 构建水流图
+        G, _ = build_waterflow_graph(scene["lane_graph"], ego_lane_id)
+        lane_graph = scene["lane_graph"].get("lanes", {})
+
+        # === 4. 提取红绿灯和停牌 lane id
+        traffic_light_lanes = set()
+        for light in scene.get("traffic_lights", []):
+            if "lane" in light:
+                traffic_light_lanes.add(light["lane"])
+
+        stop_sign_lanes = set()
+        for ss in scene["lane_graph"].get("stop_signs", []):
+            if "lane" in ss:
+                stop_sign_lanes.add(ss["lane"])
+
+        # === 5. 构建 suc/pred 图索引（保证方向连通）
+        suc_map = scene["lane_graph"].get("suc_pairs", {})
+        pred_map = scene["lane_graph"].get("pre_pairs", {})
+
+        logging.info(f"🚦 traffic_light lanes: {traffic_light_lanes}")
+        logging.info(f"🛑 stop_sign lanes: {stop_sign_lanes}")
+
+        # === 5. 遍历 lane 节点构建 token
+        token_id = 0
         for lane_id in G.nodes:
-            # 获取自身及邻居
-            successors = list(G.successors(lane_id))
-            predecessors = list(G.predecessors(lane_id))
-
-            # 如果不够邻居，跳过或补零
-            if len(successors) == 0 or len(predecessors) == 0:
+            centerline = lane_graph.get(lane_id)
+            if centerline is None or centerline.shape[0] < 2:
                 continue
 
-            # === 朝向角（朝向谁） ===
-            center_vec = compute_lane_heading(scenario, lane_id)
-            pred_vecs = [compute_lane_heading(scenario, pid) for pid in predecessors]
-            succ_vecs = [compute_lane_heading(scenario, sid) for sid in successors]
+            # === 计算 heading vector
+            center_vec = centerline[-1, :2] - centerline[0, :2]
+            center_vec = center_vec / (np.linalg.norm(center_vec) + 1e-6)
+            heading_token = angle2token(center_vec, bins=16)
 
-            # === 将角度转为离散 token
-            token_center = angle2token(center_vec, bins=16)
-            token_pred = angle2token(pred_vecs[0], bins=16)  # 取一个前驱
-            token_succ = angle2token(succ_vecs[0], bins=16)
+            # === 获取邻居
+            left_id = scene["lane_graph"]["left_pairs"].get(lane_id, [None])[0]
+            right_id = scene["lane_graph"]["right_pairs"].get(lane_id, [None])[0]
 
-            # === 构造 token triplet
-            token_triplet = (token_pred, token_center, token_succ)
-            tokens.append(token_triplet)
-            lane_token_map[lane_id] = token_triplet
+            # === 后继/前驱信息（已是 lane_id）
+            suc_ids = suc_map.get(lane_id, [])
+            pred_ids = pred_map.get(lane_id, [])
 
-        flat_tokens = [t for triplet in tokens for t in triplet]
-        counter = Counter(flat_tokens)
-        debug_print("🧩 Token 分布：", "begin!")
-        for token, count in sorted(counter.items()):
-            logging.info(f"Token {token}: {count} 次")
+            # === 状态标注
+            is_start = lane_id == ego_lane_id
+            has_light = lane_id in traffic_light_lanes
+            has_stop = lane_id in stop_sign_lanes
 
-        debug_print("🧩 Token 分布：", "end!")
+            # === 构造 token 对象
+            token = LaneToken(
+                id=token_id,
+                lane_id=lane_id,
+                centerline=centerline,
+                heading_token=heading_token,
+                succ_id=suc_ids,
+                pred_id=pred_ids,
+                left_id=left_id,
+                right_id=right_id,
+                is_start=is_start,
+                has_traffic_light=has_light,
+                has_stop_sign=has_stop,
+                ego_xy=sdc_xy,
+                w2e=w2e,
+            )
+
+            tokens.append(token)
+            lane_token_map[lane_id] = token_id
+            token_id += 1
+
+        logging.info(f"🚧 共生成 {len(tokens)} 个 LaneToken")
         return tokens, lane_token_map
+
+    def _encode_traffic_lights_impl(self, scene, frame_idx):
+        traffic_lights = scene.get("traffic_lights", [])
+
+        if frame_idx >= len(traffic_lights):
+            return [], {}
+
+        tokens = []
+        token_map = {}
+        lane_graph = scene.get("lane_graph", {}).get("lanes", {})
+
+        for i, tls in enumerate(traffic_lights[frame_idx]):
+            stop_point = tls.get("stop_point")
+            if stop_point is None:
+                continue
+            controlled_lane = tls.get("lane", None)
+
+            # 计算 dx, dy 用于绘图偏移
+            if controlled_lane is not None and controlled_lane in lane_graph:
+                lane = lane_graph[controlled_lane]
+                if len(lane) >= 2:
+                    vec = lane[-1, :2] - lane[0, :2]
+                    norm = np.linalg.norm(vec) + 1e-6
+                    dx, dy = vec[0] / norm, vec[1] / norm
+
+            token = TrafficLightToken(
+                id=i,
+                frame_idx=frame_idx,
+                x=stop_point["x"],
+                y=stop_point["y"],
+                state=tls["state"],
+                controlled_lane=controlled_lane,
+                dx=dx,
+                dy=dy,
+            )
+            tokens.append(token)
+            token_map[i] = len(tokens) - 1
+
+        return tokens, token_map
+
+    def _encode_agents_impl(
+        self, scene, frame_idx
+    ): ...  # ← 你之后写的 vehicle token 提取逻辑

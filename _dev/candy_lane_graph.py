@@ -27,6 +27,7 @@ from _dev.render_frame import (
     draw_heading_vector,
     draw_lane_tokens,
     draw_outer_circle,
+    draw_traffic_light_tokens,
     draw_traffic_lights,
     extract_ego_info,
     init_canvas,
@@ -37,7 +38,11 @@ from _dev.render_frame import (
 
 def plot_lane_graph(scene, frame_idx=0, radius=50.0, save_path="lane_debug.png"):
     # === 初始化画布
+    # logging.info(f"{explore_dict(scene)}")
+    # logging.info(f"scene keys: {scene.keys()}")
+    # logging.info(f"lane graph keys: {scene.get('lane_graph', {}).keys()}")
     fig, ax = init_canvas(frame_idx, radius)
+    # debug_break("init_canvas")
 
     # === 提取 ego 位置信息 & 坐标变换矩阵
     ego, ego_pos, ego_heading_deg = extract_ego_info(scene, frame_idx)
@@ -48,18 +53,26 @@ def plot_lane_graph(scene, frame_idx=0, radius=50.0, save_path="lane_debug.png")
     draw_heading_vector(ax, ego_pos, ego_heading_deg, w2e)
 
     draw_agents(ax, scene.get("objects", []), scene["av_idx"], frame_idx, w2e)
-    logging.info(
-        f"Frame {frame_idx} | Ego Pos = {ego_pos}, Heading = {ego_heading_deg:.2f}°"
-    )
-
+    # logging.info(
+    #     f"Frame {frame_idx} | Ego Pos = {ego_pos}, Heading = {ego_heading_deg:.2f}°"
+    # )
+    #
     draw_lane_tokens(
-        ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e
+        ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e, radius
     )
 
     draw_outer_circle(ax, radius)
 
-    logging.info(f"traffic lights: {scene.get('traffic_lights', [])}")
+    # logging.info(f"traffic lights: {scene.get('traffic_lights', [])}")
     draw_traffic_lights(ax, scene.get("traffic_lights", []), frame_idx, w2e)
+
+    draw_traffic_light_tokens(
+        ax,
+        scene.get("traffic_light_tokens", []),
+        scene.get("traffic_light_token_map", {}),
+        w2e,
+        radius,
+    )
     # === 获取车道结构
     lane_graph = scene.get("lane_graph", {})
     lane_token_map = scene.get("lane_token_map", {})

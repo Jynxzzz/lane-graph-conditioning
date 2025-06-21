@@ -16,6 +16,10 @@ from _dev.encoder_debug import encode_lanes_debug
 logging = setup_logger("render_frame", "logs/render_frame.log")
 
 
+def within_radius(x, y, radius):
+    return abs(x) < radius and abs(y) < radius
+
+
 def world_to_ego(points, ego_pos, ego_heading_deg):
     heading_rad = math.radians(ego_heading_deg)
     adjusted_heading = heading_rad - np.pi / 2  # Waymo heading: 0° = 北，转成 X+ 朝前
@@ -302,7 +306,58 @@ def save_canvas(fig, save_path):
 import matplotlib.pyplot as plt
 
 
-def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50.0):
+def draw_traffic_light_tokens(
+    ax, traffic_light_tokens, token_map, w2e=None, radius=50.0
+):
+    for i, token in enumerate(traffic_light_tokens):
+        try:
+            x, y = token.x, token.y
+            if w2e is not None:
+                x, y = w2e(np.array([[x, y]]))[0]
+
+            if abs(x) > radius or abs(y) > radius:
+                continue
+
+            token_id = token_map.get(i, None)
+
+            # === 显示 Traffic Light 名称（上）
+            if within_radius(x, y, radius):
+                ax.text(
+                    x,
+                    y - 3,
+                    f"TL{i}",
+                    fontsize=6,
+                    color="darkred",
+                    ha="center",
+                    va="center",
+                    bbox=dict(
+                        facecolor="white",
+                        alpha=0.6,
+                        edgecolor="gray",
+                        boxstyle="round,pad=0.2",
+                    ),
+                    zorder=5,
+                )
+
+            # === 显示 Token ID（下）
+            if within_radius(x, y, radius) and token_id is not None:
+                ax.text(
+                    x,
+                    y - 6,
+                    f"t{token_id}",
+                    fontsize=7,
+                    color="green",
+                    ha="center",
+                    va="center",
+                    bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
+                    zorder=5,
+                )
+
+        except Exception as e:
+            logging.warning(f"[draw_traffic_light_tokens] skipped: {e}")
+
+
+def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50):
     for lane_id, lane_pts in lane_graph.get("lanes", {}).items():
         token = lane_token_map.get(lane_id)
         if token is None:
@@ -317,127 +372,65 @@ def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radiu
 
         if w2e is not None:
             try:
-                lane_pts = w2e(lane_pts[:, :2])
+                transformed_pts = w2e(lane_pts[:, :2])
             except Exception as e:
                 logging.error(f"[❌ ERROR] lane {lane_id} transform failed: {e}")
                 continue
 
-        # 画 lane 曲线
+            if transformed_pts.ndim != 2 or transformed_pts.shape[0] == 0:
+                logging.warning(
+                    f"[⚠️ skipped] lane {lane_id} transformed result invalid: shape={transformed_pts.shape}"
+                )
+                continue
+
+            lane_pts = transformed_pts
+        # 显示 lane id（上方偏移 + 黑色）
+        x, y = lane_pts[0, 0], lane_pts[0, 1]  # 起点位置
+        if within_radius(x, y, radius):
+            ax.text(
+                x,
+                y - 9.0,
+                f"{lane_id}",
+                fontsize=6,
+                color="black",
+                ha="center",
+                va="center",
+                bbox=dict(
+                    facecolor="white",
+                    alpha=0.6,
+                    edgecolor="gray",
+                    boxstyle="round,pad=0.2",
+                ),
+                zorder=5,
+            )
+
+        # 显示 token（下方偏移 + 蓝色）
+
+        if lane_token_map and lane_id in lane_token_map and within_radius(x, y, radius):
+            token = lane_token_map[lane_id]
+            ax.text(
+                x,
+                y - 12,
+                f"t{token}",
+                fontsize=7,  # 稍大点
+                color="blue",
+                ha="center",
+                va="center",
+                bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
+                zorder=5,
+            )
         xs, ys = lane_pts[:, 0], lane_pts[:, 1]
         mid = len(xs) // 2
         ax.plot(xs, ys, linewidth=1, color="gray", alpha=0.6)
 
-        x, y = lane_pts[0, 0], lane_pts[0, 1]  # 起点位置作为 anchor
-
-        # 🛡️ 安全范围内才显示 text
-        if abs(x) < radius and abs(y) < radius:
-            try:
-                # === 上方：显示 lane_id
-                ax.text(
-                    x,
-                    y + 1.0,
-                    f"{lane_id}",
-                    fontsize=6,
-                    color="black",
-                    ha="center",
-                    va="center",
-                    bbox=dict(
-                        facecolor="white",
-                        alpha=0.6,
-                        edgecolor="gray",
-                        boxstyle="round,pad=0.2",
-                    ),
-                    zorder=5,
-                )
-
-                # === 下方：显示 token
-                ax.text(
-                    x,
-                    y - 1.7,
-                    f"t{token}",
-                    fontsize=7,
-                    color="blue",
-                    ha="center",
-                    va="center",
-                    bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
-                    zorder=5,
-                )
-            except Exception as e:
-                logging.warning(
-                    f"[text skipped] lane {lane_id} label render error: {e}"
-                )
-
-
-# def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6, radius=50):
-#     for lane_id, lane_pts in lane_graph.get("lanes", {}).items():
-#         token = lane_token_map.get(lane_id)
-#         if token is None:
-#             continue
-#
-#         lane_pts = np.array(lane_pts)
-#         if lane_pts.ndim != 2 or lane_pts.shape[0] == 0 or lane_pts.shape[1] < 2:
-#             logging.warning(
-#                 f"[draw_lane_tokens] lane {lane_id} → 非法坐标 shape {lane_pts.shape}"
-#             )
-#             continue
-#
-#         if w2e is not None:
-#             try:
-#                 transformed_pts = w2e(lane_pts[:, :2])
-#             except Exception as e:
-#                 logging.error(f"[❌ ERROR] lane {lane_id} transform failed: {e}")
-#                 continue
-#
-#             if transformed_pts.ndim != 2 or transformed_pts.shape[0] == 0:
-#                 logging.warning(
-#                     f"[⚠️ skipped] lane {lane_id} transformed result invalid: shape={transformed_pts.shape}"
-#                 )
-#                 continue
-#
-#             lane_pts = transformed_pts
-#         # 显示 lane id（上方偏移 + 黑色）
-#         x, y = lane_pts[0, 0], lane_pts[0, 1]  # 起点位置
-#         ax.text(
-#             x,
-#             y + 1.0,
-#             f"{lane_id}",
-#             fontsize=6,
-#             color="black",
-#             ha="center",
-#             va="center",
-#             bbox=dict(
-#                 facecolor="white", alpha=0.6, edgecolor="gray", boxstyle="round,pad=0.2"
-#             ),
-#             zorder=5,
-#         )
-#
-#         # 显示 token（下方偏移 + 蓝色）
-#         if lane_token_map and lane_id in lane_token_map:
-#             token = lane_token_map[lane_id]
-#             ax.text(
-#                 x,
-#                 y - 1.7,
-#                 f"t{token}",
-#                 fontsize=7,  # 稍大点
-#                 color="blue",
-#                 ha="center",
-#                 va="center",
-#                 bbox=dict(facecolor="white", alpha=0.4, edgecolor="none"),
-#                 zorder=5,
-#             )
-#         xs, ys = lane_pts[:, 0], lane_pts[:, 1]
-#         mid = len(xs) // 2
-#         ax.plot(xs, ys, linewidth=1, color="gray", alpha=0.6)
-#
-#         # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
-#         # if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
-#         #     try:
-#         #         ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
-#         #     except Exception as e:
-#         #         logging.warning(
-#         #             f"[text skipped] lane {lane_id} token render error: {e}"
-#         #         )
-#         radius = 50.0  # 你可以传进来作为参数
+        # 💥关键：安全地放置 text，避免触发 matplotlib 自动缩放机制
+        # if abs(xs[mid]) < radius and abs(ys[mid]) < radius:
+        #     try:
+        #         ax.text(xs[mid], ys[mid], str(token), fontsize=fontsize, color="blue")
+        #     except Exception as e:
+        #         logging.warning(
+        #             f"[text skipped] lane {lane_id} token render error: {e}"
+        #         )
 
 
 # def draw_lane_tokens(ax, lane_graph, lane_token_map, w2e=None, fontsize=6):
@@ -496,7 +489,7 @@ def render_bev_frame(
     draw_agents(ax, scene.get("objects", []), scene["av_idx"], frame_idx, w2e)
 
     draw_lane_tokens(
-        ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e
+        ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e, radius
     )
 
     draw_outer_circle(ax, radius)

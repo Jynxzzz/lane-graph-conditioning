@@ -44,23 +44,35 @@ def test_multiple_scenarios(cfg: DictConfig):
                     logging.warning(f"⛔ 跳过损坏场景: {scene_name}")
                     continue
 
-                # === 编码
-                tokens, lane_token_map = encoder.encode(scenario, cfg.encoder)
-                scenario["lane_tokens"] = tokens
+                # === 编码车道
+                lane_tokens, lane_token_map = encoder.encode_lanes(scenario)
+                scenario["lane_tokens"] = lane_tokens
                 scenario["lane_token_map"] = lane_token_map
+
+                # === 编码红绿灯
+                traffic_tokens, traffic_token_map = encoder.encode_traffic_lights(
+                    scenario, frame_idx=0
+                )
+                scenario["traffic_light_tokens"] = traffic_tokens
+                scenario["traffic_light_token_map"] = traffic_token_map
 
                 # === 保存图像
                 save_path = output_dir / f"lane_debug_{idx:03d}.png"
-                plot_lane_graph(scenario, frame_idx=0, save_path=str(save_path))
+                plot_lane_graph(
+                    scenario,
+                    radius=cfg.scene.radius,
+                    frame_idx=0,
+                    save_path=str(save_path),
+                )
 
                 # === token 统计
                 token_count = {}
-                for t in tokens:
+                for t in lane_tokens:
                     token_count[str(t)] = token_count.get(str(t), 0) + 1
                 stats_entry = {
                     "scene": scene_name,
                     "token_counts": token_count,
-                    "num_tokens": len(tokens),
+                    "num_tokens": len(lane_tokens),
                 }
                 stats_f.write(json.dumps(stats_entry) + "\n")
 
@@ -96,15 +108,24 @@ def test_single_scenario(cfg: DictConfig):
     encoder = build_encoder(cfg.encoder.name)
 
     # === 编码车道
-    tokens, lane_token_map = encoder.encode(scenario, cfg.encoder)
+    tokens, lane_token_map = encoder.encode_lanes(scenario)
     scenario["lane_tokens"] = tokens
     scenario["lane_token_map"] = lane_token_map
+
+    # === 编码红绿灯
+    traffic_tokens, traffic_token_map = encoder.encode_traffic_lights(
+        scenario, frame_idx=0
+    )
+    scenario["traffic_light_tokens"] = traffic_tokens
+    scenario["traffic_light_token_map"] = traffic_token_map
 
     # === 保存图像
     frame_idx = cfg.test.test_frame_idx
     filename = f"lane_debug_{frame_idx:03d}.png"
     save_path = output_dir / filename
-    plot_lane_graph(scenario, frame_idx=frame_idx, save_path=str(save_path))
+    plot_lane_graph(
+        scenario, radius=cfg.scene.radius, frame_idx=frame_idx, save_path=str(save_path)
+    )
 
     logging.info(f"✅ 单场景 lane 图保存至: {save_path}")
     logging.info(f"🔢 编码 token 总数: {len(tokens)}")
