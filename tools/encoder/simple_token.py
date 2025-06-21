@@ -49,6 +49,14 @@ class SimpleEncoder(BaseEncoder):
     def encode_agents(self, scene, frame_idx):
         return self._encode_agents_impl(scene, frame_idx)
 
+    # ✅ 你接下来要写的
+    def extract_gt_path_lanes(self, scene):
+        """
+        从 ground truth 轨迹中解析出 goal 点，并寻找最短路径经过的 lane id 列表。
+        返回：goal_lane_id, lane_path_ids
+        """
+        return self._extract_gt_path_lanes_impl(scene)
+
     def _encode_lanes_impl(self, scene):
         tokens = []
         lane_token_map = {}
@@ -62,7 +70,7 @@ class SimpleEncoder(BaseEncoder):
         ego_lane_id = find_ego_lane_id(sdc_xy, scene["lane_graph"])
 
         # === 3. 构建水流图
-        G, _ = build_waterflow_graph(scene["lane_graph"], ego_lane_id)
+        g, _ = build_waterflow_graph(scene["lane_graph"], ego_lane_id)
         lane_graph = scene["lane_graph"].get("lanes", {})
 
         # === 4. 提取红绿灯和停牌 lane id
@@ -124,6 +132,7 @@ class SimpleEncoder(BaseEncoder):
                 ego_xy=sdc_xy,
                 w2e=w2e,
             )
+            logging.info(f"🚧 Lane Token: {token}")
 
             tokens.append(token)
             lane_token_map[lane_id] = token_id
@@ -166,6 +175,7 @@ class SimpleEncoder(BaseEncoder):
                 dx=dx,
                 dy=dy,
             )
+            logging.info(f"🚦 Traffic Light Token: {token}")
             tokens.append(token)
             token_map[i] = len(tokens) - 1
 
@@ -174,3 +184,24 @@ class SimpleEncoder(BaseEncoder):
     def _encode_agents_impl(
         self, scene, frame_idx
     ): ...  # ← 你之后写的 vehicle token 提取逻辑
+
+    def _extract_gt_path_lanes_impl(self, scene):
+        # 1. 找到 ego 车 ID（一般是 0）
+        sdc_id = scene["sdc_id"]
+        sdc_track = scene["tracks"][sdc_id]
+
+        # 2. 提取其轨迹
+        traj = sdc_track["trajectory"]  # (T, 2)
+
+        # 3. 取最后一个位置作为 goal 候选点
+        goal_xy = traj[-1]
+
+        # 4. 在 lane_graph 中找最近的 lane_id
+        lane_graph = scene["lane_graph"]
+        goal_lane_id = find_nearest_lane(goal_xy, lane_graph)
+
+        # 5. 用 BFS / Dijkstra 找从当前 ego lane 到 goal 的 lane_id path
+        ego_lane_id = find_nearest_lane(traj[0], lane_graph)
+        path = find_shortest_lane_path(ego_lane_id, goal_lane_id, lane_graph)
+
+        return goal_lane_id, path

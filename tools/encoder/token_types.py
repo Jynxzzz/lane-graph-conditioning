@@ -7,31 +7,57 @@ import numpy as np
 @dataclass
 class TrafficLightToken:
     id: int
-    frame_idx: int
-    x: float
+    frame_idx: int  # 出现在哪一帧（用于时序建模）
+    x: float  # 当前 token 在车辆坐标系下的位置
     y: float
-    state: int
-    controlled_lane: Optional[int] = None
+    state: int  # 0=red, 1=yellow, 2=green
+    controlled_lane: Optional[int] = None  # 控制的 lane_id（可用于图结构）
 
-    # ✅ 新增字段：方向向量（用于绘图偏移 label）
-    dx: float = 0.0  # x 方向分量
-    dy: float = 1.0  # y 方向分量
+    # ✅ 可选方向向量（label 渲染偏移方向）
+    dx: float = 0.0
+    dy: float = 1.0
 
 
 @dataclass
 class LaneToken:
-    id: int  # token 编号
-    lane_id: str  # 原始 lane 编号
-    centerline: np.ndarray  # (N, 2)
-    heading_token: int  # 离散方向 token
-    pred_id: List[str] = field(default_factory=list)  # 前驱 lane_id 列表
-    succ_id: List[str] = field(default_factory=list)  # 后继 lane_id 列表
-    left_id: Optional[str] = None  # 左邻
-    right_id: Optional[str] = None  # 右邻
-    is_start: bool = False  # 是否是 ego 起点
-    is_goal: bool = False  # 是否是目标 lane（未来加入）
-    on_GT_path: bool = False  # 是否在 GT 路径上（未来加入）
+    id: int  # token 编号（全局唯一）
+    lane_id: str  # 原始地图中的 lane ID
+    centerline: np.ndarray  # 中心线坐标 (N, 2)
+    heading_token: int  # 离散化方向 token 编号（用于方向预测）
+
+    # 拓扑结构
+    pred_id: List[str] = field(default_factory=list)
+    succ_id: List[str] = field(default_factory=list)
+    left_id: Optional[str] = None
+    right_id: Optional[str] = None
+
+    # 语义标签
+    is_start: bool = False
+    is_goal: bool = False
+    on_GT_path: bool = False
     has_traffic_light: bool = False
     has_stop_sign: bool = False
-    ego_xy: Optional[np.ndarray] = None  # ego 位置
-    w2e: Optional[np.ndarray] = None  # 世界转 ego 坐标系变换
+
+    # 坐标系辅助（如绘图或 frame 对齐）
+    ego_xy: Optional[np.ndarray] = None  # 在 ego frame 下的起始点位置
+    w2e: Optional[np.ndarray] = None  # 世界 → ego frame 的坐标变换矩阵
+
+
+@dataclass
+class SDCToken:
+    id: int  # token ID
+    x: float
+    y: float
+    heading: float  # 朝向（单位：弧度）
+    speed: float  # m/s
+    accel: float  # m/s²
+
+
+@dataclass
+class AgentToken:
+    id: int  # token 编号
+    x: float
+    y: float
+    vx: float  # x方向速度（单位 m/s）
+    vy: float  # y方向速度
+    relative_to_sdc: bool = True  # 是否为相对 ego 车的局部坐标系
