@@ -31,6 +31,8 @@ from typing import List, Optional
 import numpy as np
 from tools.encoder.base_encoder import BaseEncoder  # ← 引入我们刚刚写的抽象类
 from tools.encoder.token_types import LaneToken, TrafficLightToken
+from tools.encoder.traj_tokenizer import encode_traj_to_tokens
+from utils.traj_processing import extract_sdc_and_neighbors
 
 
 class SimpleEncoder(BaseEncoder):
@@ -47,7 +49,10 @@ class SimpleEncoder(BaseEncoder):
         return self._encode_traffic_lights_impl(scene, frame_idx)
 
     def encode_agents(self, scene, frame_idx):
-        return self._encode_agents_impl(scene, frame_idx)
+        traj_info = extract_sdc_and_neighbors(scene, frame_idx=frame_idx)
+        sdc_traj = traj_info["sdc_traj"]
+        neighbors = traj_info["neighbor_trajs"]
+        return encode_traj_to_tokens(sdc_traj, neighbors)
 
     # ✅ 你接下来要写的
     def extract_gt_path_lanes(self, scene):
@@ -70,7 +75,7 @@ class SimpleEncoder(BaseEncoder):
         ego_lane_id = find_ego_lane_id(sdc_xy, scene["lane_graph"])
 
         # === 3. 构建水流图
-        g, _ = build_waterflow_graph(scene["lane_graph"], ego_lane_id)
+        G, _ = build_waterflow_graph(scene["lane_graph"], ego_lane_id)
         lane_graph = scene["lane_graph"].get("lanes", {})
 
         # === 4. 提取红绿灯和停牌 lane id
@@ -132,7 +137,7 @@ class SimpleEncoder(BaseEncoder):
                 ego_xy=sdc_xy,
                 w2e=w2e,
             )
-            logging.info(f"🚧 Lane Token: {token}")
+            # logging.info(f"🚧 Lane Token: {token}")
 
             tokens.append(token)
             lane_token_map[lane_id] = token_id
@@ -175,15 +180,11 @@ class SimpleEncoder(BaseEncoder):
                 dx=dx,
                 dy=dy,
             )
-            logging.info(f"🚦 Traffic Light Token: {token}")
+            # logging.info(f"🚦 Traffic Light Token: {token}")
             tokens.append(token)
             token_map[i] = len(tokens) - 1
 
         return tokens, token_map
-
-    def _encode_agents_impl(
-        self, scene, frame_idx
-    ): ...  # ← 你之后写的 vehicle token 提取逻辑
 
     def _extract_gt_path_lanes_impl(self, scene):
         # 1. 找到 ego 车 ID（一般是 0）

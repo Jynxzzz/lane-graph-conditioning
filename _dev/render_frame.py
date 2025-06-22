@@ -50,6 +50,85 @@ logging.basicConfig(level=logging.INFO)
 #     draw_velocity_vector,
 # )
 
+from matplotlib.patches import FancyArrow, Rectangle
+
+
+def draw_agents_as_boxes(ax, agents, av_idx, frame_idx, w2e, ego_heading_deg):
+    """
+    以矩形框的形式绘制所有 agent（含朝向箭头），不包含 AV 本身。
+
+    参数：
+        ax: matplotlib 画布
+        agents: 所有 agent 对象（含 AV）
+        av_idx: AV 的下标
+        frame_idx: 当前帧号
+        w2e: world → ego 坐标变换函数
+        ego_heading_deg: AV 的世界朝向角（用于相对角度计算）
+    """
+    import logging
+
+    import numpy as np
+
+    for i, agent in enumerate(agents):
+        if i == av_idx:
+            continue
+        try:
+            pos = agent["position"][frame_idx]
+            valid = agent["valid"][frame_idx]
+            if not valid or pos["x"] < -9000:
+                continue
+
+            # 获取世界坐标与 yaw
+            x, y = pos["x"], pos["y"]
+            yaw_world_rad = pos.get("heading", 0.0)
+            yaw_relative_rad = yaw_world_rad - np.radians(ego_heading_deg)
+
+            # 局部坐标
+            point_local = w2e(np.array([[x, y]]))[0]
+
+            # vehicle 类型推测尺寸
+            vehicle_type = agent.get("type", "car").lower()
+            if "truck" in vehicle_type or "bus" in vehicle_type:
+                length, width = 10.0, 3.0
+            elif "bike" in vehicle_type or "pedestrian" in vehicle_type:
+                length, width = 1.0, 0.6
+            else:
+                length, width = 4.8, 2.0
+
+            # 绘制边框（绕中心旋转）
+            rect = Rectangle(
+                (point_local[0] - width / 2, point_local[1] - length / 2),
+                width,
+                length,
+                angle=np.degrees(yaw_relative_rad),
+                edgecolor="orange",
+                facecolor="none",
+                linewidth=1.0,
+                zorder=3,
+            )
+            ax.add_patch(rect)
+
+            # 绘制朝向箭头
+            dx = np.sin(yaw_relative_rad) * length * 0.5
+            dy = np.cos(yaw_relative_rad) * length * 0.5
+            ax.add_patch(
+                FancyArrow(
+                    point_local[0],
+                    point_local[1],
+                    dx,
+                    dy,
+                    width=0.2,
+                    head_width=0.8,
+                    head_length=1.0,
+                    color="orange",
+                    length_includes_head=True,
+                    zorder=4,
+                )
+            )
+
+        except Exception as e:
+            logging.warning(f"[draw_agents_as_boxes] agent {i} skipped: {e}")
+
 
 def init_canvas(frame_idx, radius):
     fig, ax = plt.subplots(figsize=(6, 6))
@@ -487,6 +566,14 @@ def render_bev_frame(
         lane_token_map=scene.get("lane_token_map", {}),
     )
     draw_agents(ax, scene.get("objects", []), scene["av_idx"], frame_idx, w2e)
+    draw_agents_as_boxes(
+        ax,
+        agents=scene["objects"],
+        av_idx=scene["av_idx"],
+        frame_idx=frame_idx,
+        w2e=w2e,
+        ego_heading_deg=ego_heading_deg,
+    )
 
     draw_lane_tokens(
         ax, scene.get("lane_graph", {}), scene.get("lane_token_map", {}), w2e, radius

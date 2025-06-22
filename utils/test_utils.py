@@ -8,12 +8,20 @@ from pathlib import Path
 import hydra
 import numpy as np
 from _dev.candy_lane_graph import extract_ego_info, plot_lane_graph
-from jynxzzzdebug import generate_paths, setup_logger
+from jynxzzzdebug import (
+    debug_break,
+    debug_print,
+    explore_dict,
+    generate_paths,
+    setup_logger,
+)
 from omegaconf import DictConfig
 from tools.encoder import build_encoder
 from tools.lane_graph.lane_explorer import build_waterflow_graph, find_ego_lane_id
 from tools.lane_graph.lane_graph_builder import build_lane_graph
 from tools.scene_loader import load_random_scene_from_list, load_selected_scene_list
+
+from utils.traj_processing import extract_sdc_and_neighbors
 
 logging = setup_logger("test_utils", "logs/test_utils.log")
 
@@ -104,8 +112,17 @@ def test_single_scenario(cfg: DictConfig):
         logging.warning("⚠️ 当前场景损坏，跳过")
         return
 
+    result = extract_sdc_and_neighbors(scenario, max_distance=20.0, frame_idx=0)
+
+    # logging.info(f"🚗 SDC轨迹长度: {len(result['sdc_traj'])}")
+    # logging.info(f"🚙 周围邻居数: {len(result['neighbor_ids'])}")
+    # for nid, traj in result["neighbor_trajs"].items():
+    #     logging.info(f"  🔹 Neighbor {nid} 轨迹长度: {len(traj)}")
+
     # === 构建编码器
     encoder = build_encoder(cfg.encoder.name)
+    # objects traj:
+    agent_tokens = encoder.encode_agents(scenario, frame_idx=0)
 
     # === 编码车道
     tokens, lane_token_map = encoder.encode_lanes(scenario)

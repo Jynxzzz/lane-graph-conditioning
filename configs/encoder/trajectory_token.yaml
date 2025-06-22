@@ -1,0 +1,5 @@
+name: trajectory_token
+max_len: 128
+radius: 30.0
+discretize_bins: 16
+use_bfs_guidance: true

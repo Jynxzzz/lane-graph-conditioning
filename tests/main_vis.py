@@ -65,7 +65,7 @@ def main(cfg: DictConfig):
     encoder = build_encoder(cfg.encoder.name)
 
     # encoding
-    tokens, lane_token_map = encoder.encode(scenario, cfg.encoder)
+    tokens, lane_token_map = encoder.encode_lanes(scenario, cfg.encoder)
     scenario["lane_token_map"] = lane_token_map
     scenario["lane_tokens"] = tokens
     import numpy as np
