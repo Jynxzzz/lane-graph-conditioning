@@ -746,4 +746,4 @@ def draw_traffic_lights(ax, traffic_lights, frame_idx, w2e):
 #     plt.tight_layout()
 #     plt.savefig(save_path, dpi=150)
 #     plt.close()
-#     print(f"✅ BEV 可视化完成：{save_path}")
+#     print(f"✅ BEV 可视化完成：{save_path}",
