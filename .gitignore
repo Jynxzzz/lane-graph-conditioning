@@ -1,14 +1,57 @@
-slurm_logs/
-*.out
+# Python
 __pycache__/
 */__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
 
+# Outputs & logs
+outputs/
+slurm_logs/
+*.out
+*.log
+wandb/
+
+# Media (generated)
 *.mp4
 *.avi
 *.mkv
-*.png
 
-*.log
-*.json
+# Data files
+*.pkl
+*.pickle
+*.tfrecord*
+*.npy
 
-*.gif   
+# Large lists (data-specific)
+scene_list_*.txt
+intersection_*.txt
+neighbor_advantage_list.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude agent files
+.claude/
+ORCHESTRATOR_*.md
+DEPLOY_CLOUD.md
+PORT_FORWARDING_GUIDE.md
+
+# Development/experimental
+_dev/
+dabian/
+scripts/run_*.sh
+scripts/monitor_*.sh
+scripts/wait_*.sh
+scripts/auto_*.sh
+
+# Vercel local
+docs/project-page/.vercel/

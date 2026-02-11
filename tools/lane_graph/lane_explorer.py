@@ -221,11 +221,9 @@ def find_ego_lane_id(sdc_pos, lane_graph, threshold=2.0):
     ego_lane_id = None
     for lane_id, lane_pts in lane_graph["lanes"].items():
         dists = np.linalg.norm(lane_pts[:, :2] - sdc_pos, axis=1)
-        debug_print("find_ego_lane_id", f"计算 {lane_id} 的距离: {dists}")
         if dists.min() < min_dist and dists.min() < threshold:
             min_dist = dists.min()
             ego_lane_id = lane_id
-        debug_break("end of dists calculation")
     return ego_lane_id
 
 
