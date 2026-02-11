@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn-Aware LSTM | Xingnan Zhou</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f6f8;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f1923 0%, #1a2940 50%, #243b55 100%);
+            color: white;
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(78, 205, 196, 0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 50%, rgba(69, 183, 209, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.0em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.3;
+        }
+
+        .header .authors { font-size: 1.05em; opacity: 0.9; margin-top: 10px; position: relative; }
+        .header .affiliation { font-size: 0.95em; opacity: 0.7; margin-top: 6px; position: relative; }
+
+        .header .venue {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 20px;
+            background: rgba(46, 125, 50, 0.3);
+            border: 1px solid rgba(46, 125, 50, 0.6);
+            border-radius: 20px;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        .header-links {
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .header-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+        }
+
+        .header-links a:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .container { max-width: 920px; margin: 0 auto; padding: 36px 24px; }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 32px 36px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #1a2940;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #4ECDC4;
+        }
+
+        h3 { font-size: 1.15em; color: #1a2940; margin: 20px 0 10px; }
+
+        p { margin-bottom: 12px; line-height: 1.75; }
+
+        .abstract-box {
+            background: #f8f9fb;
+            border-left: 4px solid #4ECDC4;
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .fig-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .fig-card {
+            background: #f8f9fb;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .fig-card img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .fig-card .caption {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .fig-full {
+            background: #f8f9fb;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .fig-full img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .fig-full .caption {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.92em;
+        }
+
+        th {
+            background: #1a2940;
+            color: white;
+            padding: 10px 14px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 9px 14px;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        tr:nth-child(even) td { background: #f8f9fb; }
+        tr:hover td { background: #e8f7f6; }
+
+        .highlight { font-weight: 700; color: #1a7a72; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .stat-card { text-align: center; padding: 18px; background: #f8f9fb; border-radius: 8px; }
+        .stat-card .number { font-size: 1.7em; font-weight: 700; color: #1a2940; }
+        .stat-card .label { font-size: 0.82em; color: #888; margin-top: 2px; }
+
+        .method-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .method-list li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .method-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 12px;
+            height: 12px;
+            background: #4ECDC4;
+            border-radius: 50%;
+        }
+
+        .method-list li:last-child { border-bottom: none; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.78em;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .tag-data { background: #e3f2fd; color: #1565c0; }
+        .tag-model { background: #e8f5e9; color: #2e7d32; }
+        .tag-speed { background: #fff3e0; color: #e65100; }
+
+        .footer {
+            background-color: #0f1923;
+            color: white;
+            text-align: center;
+            padding: 28px 20px;
+            margin-top: 16px;
+        }
+
+        .footer p { opacity: 0.7; text-align: center; font-size: 0.9em; }
+        .footer a { color: #4ECDC4; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.4em; }
+            section { padding: 24px 20px; }
+            .fig-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Turn-Aware LSTM Model for Vehicle Trajectory Forecasting</h1>
+        <div class="authors">
+            <strong>Xingnan Zhou</strong>, Ciprian Alecsandru, Shahram Bashbaghi, Yongjun Jeong, Yuche Chen
+        </div>
+        <div class="affiliation">
+            Concordia University, Montreal &middot; Ericsson AI Hub Canada
+        </div>
+        <div class="venue">Published &mdash; Advances in Transportation Studies (ATS), 2025</div>
+        <div class="header-links">
+            <a href="assets/ATS2025_069_R1_Final_Xingnan_Zhou.pdf">Paper PDF</a>
+            <a href="https://github.com/Jynxzzz/Turn-Aware-LSTM_SUPP">Code &amp; Data</a>
+            <a href="#results">Results</a>
+            <a href="#method">Method</a>
+            <a href="index.html">Back to Portfolio</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <section id="abstract">
+            <h2>Abstract</h2>
+            <div class="abstract-box">
+                Accurate trajectory prediction is essential for autonomous driving safety at intersections.
+                Existing deep learning models often overlook turning behaviors, leading to curvature misestimation.
+                This study proposes a <strong>Turn-Aware LSTM</strong> network that explicitly encodes maneuver
+                type (left, right, straight) through cumulative heading-change features and one-hot indicators.
+                Evaluated on UAV-captured intersection trajectories in Montreal, the model reduces
+                <strong>FDE by 15&ndash;20%</strong> for turning maneuvers compared to a vanilla LSTM,
+                while maintaining real-time inference at <strong>~2.5 ms</strong> per trajectory.
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">15&ndash;20%</div>
+                    <div class="label">FDE Reduction (Turns)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">2.5 ms</div>
+                    <div class="label">Inference Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">30 fps</div>
+                    <div class="label">UAV Video Data</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">3</div>
+                    <div class="label">Prediction Horizons</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="study-site">
+            <h2>Study Site &amp; Data Collection</h2>
+            <p>
+                Vehicle trajectories were collected using a DJI drone hovering at <strong>80 meters</strong>
+                above a four-arm signalized intersection in <strong>Ch&acirc;teauguay, Montreal, QC</strong>.
+                Video was captured at 30 fps during peak hours, then stabilized using a
+                <strong>Fourier-Mellin transform</strong> to correct UAV motion artifacts.
+            </p>
+
+            <div class="fig-grid">
+                <div class="fig-card">
+                    <img src="assets/ats2025/fig_15.png" alt="Drone positioned 80 meters above the intersection">
+                    <div class="caption">Drone positioned 80m above the study intersection with YOLOv8 detections</div>
+                </div>
+                <div class="fig-card">
+                    <img src="assets/ats2025/fig_12.png" alt="Real-time detection and tracking">
+                    <div class="caption">Real-time YOLOv8 detection with Deep SORT tracking IDs</div>
+                </div>
+            </div>
+
+            <p>
+                Vehicles were detected using <strong>YOLOv8</strong> retrained on 18,000 custom-labeled images,
+                and tracked across frames with <strong>Deep SORT</strong>. The dataset includes passenger vehicles,
+                trucks, and buses, split into 70% training, 15% validation, and 15% test sets.
+            </p>
+        </section>
+
+        <section id="method">
+            <h2>Method</h2>
+
+            <div class="fig-full">
+                <img src="assets/ats2025/fig_24.png" alt="End-to-end pipeline" style="max-width: 600px;">
+                <div class="caption">End-to-end pipeline: UAV video &rarr; YOLOv8 detection &rarr; Deep SORT tracking &rarr; Turn-Aware LSTM forecasting</div>
+            </div>
+
+            <h3>Turn-Aware Feature Encoding</h3>
+            <p>
+                The key insight is that turning maneuvers are the hardest to predict, yet standard LSTMs
+                have no explicit representation of maneuver intent. We address this with:
+            </p>
+            <ul class="method-list">
+                <li>
+                    <strong>Cumulative heading change</strong> &mdash; A 1-second rolling sum of
+                    instantaneous angular changes, providing a smooth signal of turning intent
+                </li>
+                <li>
+                    <strong>One-hot maneuver encoding</strong> &mdash; Left/right/straight classification
+                    using a 10&deg; heading threshold, aggregated via majority vote to suppress frame-level noise
+                </li>
+                <li>
+                    <strong>Feature vector</strong> &mdash; Position (x, y), velocity (vx, vy), acceleration (ax, ay),
+                    plus the one-hot turn indicators at each time step
+                </li>
+            </ul>
+
+            <div class="fig-full">
+                <img src="assets/ats2025/fig_18.png" alt="Trajectory visualization by maneuver type" style="max-width: 500px;">
+                <div class="caption">Vehicle trajectories color-coded by maneuver type: left turns (orange), right turns (blue), straight (green)</div>
+            </div>
+
+            <h3>Encoder&ndash;Decoder Architecture</h3>
+            <p>
+                The Turn-Aware LSTM uses a 2-layer stacked encoder (128 hidden units) to compress
+                the observed trajectory, then a decoder LSTM generates future positions autoregressively.
+                The turn features are concatenated with kinematic features at the input, providing
+                explicit maneuver context throughout the encoding process.
+            </p>
+        </section>
+
+        <section id="results">
+            <h2>Results</h2>
+            <p>
+                Models were evaluated at <strong>1s, 2s, and 3s</strong> horizons (30, 60, 90 frames)
+                against three baselines: Constant Velocity (CV), Vanilla LSTM, and a Tiny Transformer.
+            </p>
+
+            <h3>Overall Performance</h3>
+            <div class="fig-grid">
+                <div class="fig-card">
+                    <img src="assets/ats2025/fig_8.png" alt="ADE over prediction horizons">
+                    <div class="caption">Average Displacement Error (ADE) across prediction horizons</div>
+                </div>
+                <div class="fig-card">
+                    <img src="assets/ats2025/fig_11.png" alt="FDE over prediction horizons">
+                    <div class="caption">Final Displacement Error (FDE) across prediction horizons</div>
+                </div>
+            </div>
+
+            <p>
+                The Tiny Transformer achieves the lowest overall errors, while the Turn-Aware LSTM
+                <strong>consistently outperforms the Vanilla LSTM</strong> at all horizons &mdash;
+                closing the gap toward the Transformer while adding negligible inference cost.
+            </p>
+
+            <h3>Per-Maneuver Breakdown</h3>
+            <p>
+                The targeted benefit of turn encoding is most visible in maneuver-specific analysis:
+            </p>
+            <div class="fig-grid">
+                <div class="fig-card">
+                    <img src="assets/ats2025/fig_21.png" alt="ADE per maneuver">
+                    <div class="caption">ADE by maneuver type at 1s, 2s, 3s horizons</div>
+                </div>
+                <div class="fig-card">
+                    <img src="assets/ats2025/fig_2.png" alt="FDE per maneuver">
+                    <div class="caption">FDE by maneuver type at 1s, 2s, 3s horizons</div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Maneuver</th>
+                        <th>Metric</th>
+                        <th>Vanilla LSTM</th>
+                        <th>Turn-Aware LSTM</th>
+                        <th>Improvement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Right Turn</td>
+                        <td>FDE @ 3s</td>
+                        <td>~0.51 m</td>
+                        <td>~0.42 m</td>
+                        <td class="highlight">~18%</td>
+                    </tr>
+                    <tr>
+                        <td>Left Turn</td>
+                        <td>FDE @ 3s</td>
+                        <td>~0.35 m</td>
+                        <td>~0.28 m</td>
+                        <td class="highlight">~20%</td>
+                    </tr>
+                    <tr>
+                        <td>Straight</td>
+                        <td>FDE @ 3s</td>
+                        <td>~0.18 m</td>
+                        <td>~0.17 m</td>
+                        <td>~6%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.88em; color: #888; text-align: center; margin-top: 4px;">
+                Turn encoding provides the largest gains precisely where prediction is hardest: turning maneuvers.
+            </p>
+
+            <h3>Computational Efficiency</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Inference Time</th>
+                        <th>Hardware</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Constant Velocity</td>
+                        <td>&lt; 1 ms</td>
+                        <td>CPU</td>
+                    </tr>
+                    <tr>
+                        <td>Vanilla LSTM</td>
+                        <td>~2.3 ms</td>
+                        <td>RTX 4090</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Turn-Aware LSTM</strong></td>
+                        <td><strong>~2.5 ms</strong></td>
+                        <td>RTX 4090</td>
+                    </tr>
+                    <tr>
+                        <td>Tiny Transformer</td>
+                        <td>~4.8 ms</td>
+                        <td>RTX 4090</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                The turn-aware features add only <strong>~0.2 ms</strong> overhead vs. the vanilla LSTM,
+                making the model fully suitable for real-time autonomous driving applications.
+            </p>
+        </section>
+
+        <section id="code">
+            <h2>Code &amp; Data</h2>
+            <p>
+                The processed trajectory datasets, maneuver annotations, and model code are publicly
+                available:
+            </p>
+            <p style="text-align: center; margin: 20px 0;">
+                <a href="https://github.com/Jynxzzz/Turn-Aware-LSTM_SUPP"
+                   style="display: inline-block; padding: 12px 28px; background: #1a2940; color: white; border-radius: 6px; text-decoration: none; font-weight: 600;">
+                    GitHub: Turn-Aware-LSTM_SUPP
+                </a>
+            </p>
+            <p style="font-size: 0.88em; color: #888;">
+                Note: Raw video data cannot be publicly released due to privacy and data-sharing restrictions.
+            </p>
+        </section>
+
+        <section id="acknowledgments">
+            <h2>Acknowledgments</h2>
+            <p>
+                This work was funded by <strong>Ericsson &mdash; Global Artificial Intelligence Accelerator
+                (GAIA) AI Hub Canada</strong> in Montr&eacute;al through the <strong>Mitacs Accelerate Program</strong>.
+            </p>
+        </section>
+
+        <section id="citation">
+            <h2>Citation</h2>
+            <pre style="background: #f8f9fb; padding: 16px; border-radius: 8px; font-size: 0.85em; overflow-x: auto; line-height: 1.6;">@article{zhou2025turnaware,
+  title={Turn-Aware LSTM Model for Vehicle Trajectory Forecasting},
+  author={Zhou, Xingnan and Alecsandru, Ciprian and Bashbaghi, Shahram and Jeong, Yongjun and Chen, Yuche},
+  journal={Advances in Transportation Studies},
+  year={2025}
+}</pre>
+        </section>
+
+    </div>
+
+    <div class="footer">
+        <p><a href="index.html">Xingnan Zhou</a> &middot; Concordia University, Montreal &middot; <a href="https://github.com/Jynxzzz">GitHub</a></p>
+        <p style="margin-top: 6px;">&copy; 2025</p>
+    </div>
+
+</body>
+</html>

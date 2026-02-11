@@ -170,6 +170,7 @@
         }
 
         .badge-review { background: #fff3e0; color: #e8a838; }
+        .badge-published { background: #e8f5e9; color: #2e7d32; }
 
         .stats-grid {
             display: grid;
@@ -280,6 +281,30 @@
             </div>
 
             <div class="pub-card">
+                <div class="pub-thumb" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e3f2fd, #bbdefb);">
+                    <span style="font-size: 2.8em;">&#128752;</span>
+                </div>
+                <div class="pub-info">
+                    <h3>
+                        <a href="turn-aware-lstm.html">Turn-Aware LSTM Model for Vehicle Trajectory Forecasting</a>
+                        <span class="badge badge-published">Published</span>
+                    </h3>
+                    <div class="pub-authors"><strong>Xingnan Zhou</strong>, Ciprian Alecsandru, Shahram Bashbaghi, Yongjun Jeong, Yuche Chen</div>
+                    <div class="pub-venue">Advances in Transportation Studies (ATS), 2025</div>
+                    <div class="pub-desc">
+                        A Turn-Aware LSTM that encodes cumulative heading changes and one-hot maneuver indicators
+                        for intersection trajectory prediction. Reduces FDE by <strong>15&ndash;20%</strong> for turning maneuvers
+                        vs. vanilla LSTM, with real-time inference (~2.5 ms) on UAV-captured intersection data in Montreal.
+                    </div>
+                    <div class="pub-links">
+                        <a href="assets/ATS2025_069_R1_Final_Xingnan_Zhou.pdf" class="link-paper">PDF</a>
+                        <a href="https://github.com/Jynxzzz/Turn-Aware-LSTM_SUPP" class="link-code">Code &amp; Data</a>
+                        <a href="turn-aware-lstm.html" class="link-project">Project Page</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card">
                 <div class="pub-thumb" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
                     <span style="font-size: 2.8em;">&#128663;</span>
                 </div>
@@ -318,7 +343,7 @@
                     <div class="label">Waymo Scenarios</div>
                 </div>
                 <div class="stat-card">
-                    <div class="number">2</div>
+                    <div class="number">3</div>
                     <div class="label">Architectures Validated</div>
                 </div>
             </div>
