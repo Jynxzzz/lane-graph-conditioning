@@ -231,16 +231,18 @@
                         to improve prediction accuracy and safety at urban intersections.
                     </p>
                     <p>
-                        I am particularly interested in how lightweight, modular lane conditioning
-                        can serve as a general-purpose inductive bias for various prediction architectures,
-                        from recurrent networks to Transformers and generative models.
+                        My work spans trajectory prediction with lane graph conditioning,
+                        LiDAR-camera sensor fusion for occlusion-robust 3D detection,
+                        and explainable AI for Transformer-based prediction models.
+                        I am interested in making autonomous driving perception both more accurate and more interpretable.
                     </p>
                     <div class="interests">
                         <span class="interest-tag">Trajectory Prediction</span>
                         <span class="interest-tag">Lane Graph Reasoning</span>
                         <span class="interest-tag">Autonomous Driving</span>
-                        <span class="interest-tag">Multi-Modal Prediction</span>
-                        <span class="interest-tag">Graph Neural Networks</span>
+                        <span class="interest-tag">3D Object Detection</span>
+                        <span class="interest-tag">LiDAR-Camera Fusion</span>
+                        <span class="interest-tag">Explainable AI</span>
                         <span class="interest-tag">Waymo Open Dataset</span>
                     </div>
                 </div>
@@ -305,22 +307,47 @@
             </div>
 
             <div class="pub-card">
-                <div class="pub-thumb" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
-                    <span style="font-size: 2.8em;">&#128663;</span>
+                <div class="pub-thumb" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
+                    <span style="font-size: 2.8em;">&#128065;</span>
                 </div>
                 <div class="pub-info">
                     <h3>
-                        Turn-Aware Hierarchical Predictive Control for Connected Autonomous Vehicles in Mixed Traffic
-                        <span class="badge badge-review">Under Review</span>
+                        <a href="attention-visualization.html">Spatial Attention Visualization for Interpretable Trajectory Prediction in Autonomous Driving: Discovering Safety Blind Spots Through Counterfactual Analysis</a>
+                        <span class="badge badge-review">In Preparation</span>
                     </h3>
                     <div class="pub-authors"><strong>Xingnan Zhou</strong>, Ciprian Alecsandru</div>
-                    <div class="pub-venue">Submitted to Transportation Research Board (TRB), 2026</div>
+                    <div class="pub-venue">Submitted to MDPI Sustainability, 2026</div>
                     <div class="pub-desc">
-                        A hierarchical predictive control framework for CAVs with V2V communication in mixed traffic.
-                        Achieves <strong>41.9% jerk reduction</strong> vs. Wiedemann 99 baseline in CARLA-VISSIM co-simulation,
-                        with comprehensive multi-seed validation and safety metric analysis (TTC, acceleration variance).
+                        A spatial attention visualization framework for Transformer-based trajectory prediction.
+                        Discovers that VRUs receive up to <strong>60% less attention</strong> than vehicles &mdash;
+                        a safety blind spot. Introduces counterfactual attention analysis on the Waymo dataset (MTR-Lite, 8.48M params).
                     </div>
                     <div class="pub-links">
+                        <a href="assets/attention-visualization-paper.pdf" class="link-paper">PDF</a>
+                        <a href="attention-visualization.html" class="link-project">Project Page</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card">
+                <div class="pub-thumb">
+                    <img src="assets/bev_lidar/fig_pipeline.png" alt="Dual-camera LiDAR fusion pipeline">
+                </div>
+                <div class="pub-info">
+                    <h3>
+                        <a href="bev-lidar-fusion.html">Dual-Camera LiDAR Fusion for Occlusion-Robust 3D Detection in Urban Driving Simulation</a>
+                        <span class="badge badge-review">In Preparation</span>
+                    </h3>
+                    <div class="pub-authors"><strong>Xingnan Zhou</strong>, Ciprian Alecsandru</div>
+                    <div class="pub-venue">Submitted to MDPI Sustainability, 2026</div>
+                    <div class="pub-desc">
+                        An asymmetric dual-camera LiDAR fusion framework combining PointPillars with drone and forward-camera
+                        YOLOv8 detections. Achieves <strong>+11.2% mAP@0.5</strong> improvement (sign test p&nbsp;=&nbsp;0.031)
+                        on a CARLA Town10HD dataset with 5-seed validation.
+                    </div>
+                    <div class="pub-links">
+                        <a href="assets/bev-lidar-fusion-paper.pdf" class="link-paper">PDF</a>
+                        <a href="bev-lidar-fusion.html" class="link-project">Project Page</a>
                     </div>
                 </div>
             </div>
@@ -331,26 +358,25 @@
             <h2>Research Highlights</h2>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="number">27.3%</div>
-                    <div class="label">minADE Improvement (8s)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">42.7%</div>
-                    <div class="label">Miss Rate Reduction</div>
+                    <div class="number">4</div>
+                    <div class="label">Papers (1 Published)</div>
                 </div>
                 <div class="stat-card">
                     <div class="number">89K</div>
                     <div class="label">Waymo Scenarios</div>
                 </div>
                 <div class="stat-card">
-                    <div class="number">3</div>
-                    <div class="label">Architectures Validated</div>
+                    <div class="number">27.3%</div>
+                    <div class="label">minADE Improvement</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">+11.2%</div>
+                    <div class="label">mAP@0.5 Fusion Gain</div>
                 </div>
             </div>
             <p style="text-align: center; color: #888; font-size: 0.9em;">
-                From our lane conditioning study &mdash; see the full
-                <a href="lane-conditioning.html" style="color: #2a8c85;">project page</a> for details,
-                animations, and error decomposition analysis.
+                Spanning trajectory prediction, 3D perception, and explainable AI &mdash;
+                see individual <a href="#publications" style="color: #2a8c85;">project pages</a> for details.
             </p>
         </section>
 
