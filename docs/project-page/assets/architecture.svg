@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500">
+  <defs>
+    <style>
+      .input-box { fill: #e8e8e8; stroke: #666; stroke-width: 2; }
+      .encoder-box { fill: #4ECDC4; stroke: #3aa9a0; stroke-width: 2; }
+      .lane-box { fill: #FF6B6B; stroke: #cc5555; stroke-width: 2; }
+      .fusion-box { fill: #9b59b6; stroke: #7d3c98; stroke-width: 2; }
+      .decoder-box { fill: #45B7D1; stroke: #3692b0; stroke-width: 2; }
+      .output-box { fill: #888; stroke: #555; stroke-width: 2; }
+      .text-dark { fill: #333; font-family: sans-serif; font-size: 13px; text-anchor: middle; }
+      .text-light { fill: white; font-family: sans-serif; font-size: 13px; text-anchor: middle; }
+      .text-small { font-size: 11px; }
+      .arrow { stroke: #555; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .dashed { stroke-dasharray: 4,4; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#555" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="25" class="text-dark" style="font-size: 18px; font-weight: bold;">Trajectory Prediction Architecture</text>
+
+  <!-- INPUTS -->
+  <g id="inputs">
+    <rect x="20" y="60" width="120" height="50" class="input-box" rx="4"/>
+    <text x="80" y="82" class="text-dark">History Trajectory</text>
+    <text x="80" y="98" class="text-dark text-small">(11×2)</text>
+
+    <rect x="20" y="130" width="120" height="50" class="input-box" rx="4"/>
+    <text x="80" y="148" class="text-dark">Neighbor</text>
+    <text x="80" y="163" class="text-dark">Trajectories</text>
+    <text x="80" y="173" class="text-dark text-small">(10×11×2)</text>
+
+    <rect x="20" y="220" width="120" height="50" class="input-box" rx="4"/>
+    <text x="80" y="242" class="text-dark">Lane Features</text>
+    <text x="80" y="258" class="text-dark text-small">(16×26)</text>
+
+    <rect x="20" y="280" width="120" height="50" class="input-box" rx="4"/>
+    <text x="80" y="302" class="text-dark">Lane Adjacency</text>
+    <text x="80" y="318" class="text-dark text-small">(16×16)</text>
+  </g>
+
+  <!-- ENCODERS -->
+  <g id="encoders">
+    <!-- Trajectory Encoder -->
+    <rect x="180" y="60" width="140" height="50" class="encoder-box" rx="4"/>
+    <text x="250" y="82" class="text-light">Trajectory Encoder</text>
+    <text x="250" y="98" class="text-light text-small">(LSTM)</text>
+    <line x1="140" y1="85" x2="180" y2="85" class="arrow"/>
+
+    <!-- Neighbor Encoder -->
+    <rect x="180" y="130" width="140" height="50" class="encoder-box" rx="4"/>
+    <text x="250" y="148" class="text-light">Neighbor Encoder</text>
+    <text x="250" y="164" class="text-light text-small">(LSTM+Pool)</text>
+    <line x1="140" y1="155" x2="180" y2="155" class="arrow"/>
+
+    <!-- Lane Graph Encoder -->
+    <rect x="180" y="220" width="140" height="110" class="lane-box" rx="4"/>
+    <text x="250" y="238" class="text-light" style="font-weight: bold;">Lane Graph Encoder</text>
+    <rect x="190" y="248" width="120" height="20" style="fill: rgba(255,255,255,0.2); stroke: none;" rx="2"/>
+    <text x="250" y="261" class="text-light text-small">Per-lane MLP</text>
+    <rect x="190" y="273" width="120" height="20" style="fill: rgba(255,255,255,0.2); stroke: none;" rx="2"/>
+    <text x="250" y="286" class="text-light text-small">Message Passing ×2</text>
+    <rect x="190" y="298" width="120" height="20" style="fill: rgba(255,255,255,0.2); stroke: none;" rx="2"/>
+    <text x="250" y="311" class="text-light text-small">Cross-Attention (ego)</text>
+    <line x1="140" y1="245" x2="180" y2="245" class="arrow"/>
+    <line x1="140" y1="305" x2="180" y2="305" class="arrow"/>
+  </g>
+
+  <!-- CONTEXT VECTORS -->
+  <g id="contexts">
+    <ellipse cx="380" cy="85" rx="55" ry="22" style="fill: #d4f1f4; stroke: #3aa9a0; stroke-width: 1.5;"/>
+    <text x="380" y="88" class="text-dark text-small">ego_hidden (128)</text>
+    <line x1="320" y1="85" x2="325" y2="85" class="arrow"/>
+
+    <ellipse cx="380" cy="155" rx="60" ry="22" style="fill: #d4f1f4; stroke: #3aa9a0; stroke-width: 1.5;"/>
+    <text x="380" y="158" class="text-dark text-small">neighbor_ctx (64)</text>
+    <line x1="320" y1="155" x2="325" y2="155" class="arrow"/>
+
+    <ellipse cx="380" cy="275" rx="50" ry="22" style="fill: #ffd4d4; stroke: #cc5555; stroke-width: 1.5;"/>
+    <text x="380" y="278" class="text-dark text-small">lane_ctx (64)</text>
+    <line x1="320" y1="275" x2="325" y2="275" class="arrow"/>
+  </g>
+
+  <!-- FUSION -->
+  <g id="fusion">
+    <rect x="480" y="140" width="110" height="70" class="fusion-box" rx="4"/>
+    <text x="535" y="165" class="text-light">Fusion</text>
+    <text x="535" y="182" class="text-light">MLP</text>
+    <text x="535" y="202" class="text-light text-small">↓</text>
+
+    <line x1="435" y1="85" x2="480" y2="160" class="arrow"/>
+    <line x1="440" y1="155" x2="480" y2="175" class="arrow"/>
+    <line x1="430" y1="275" x2="480" y2="195" class="arrow"/>
+
+    <ellipse cx="650" cy="175" rx="45" ry="22" style="fill: #e8d5f0; stroke: #7d3c98; stroke-width: 1.5;"/>
+    <text x="650" y="178" class="text-dark text-small">fused (128)</text>
+    <line x1="590" y1="175" x2="605" y2="175" class="arrow"/>
+  </g>
+
+  <!-- DECODER -->
+  <g id="decoder">
+    <rect x="730" y="130" width="110" height="50" class="decoder-box" rx="4"/>
+    <text x="785" y="152" class="text-light">MLP Decoder</text>
+    <text x="785" y="168" class="text-light text-small">→ Residuals</text>
+    <line x1="695" y1="175" x2="730" y2="155" class="arrow"/>
+
+    <!-- CV Baseline -->
+    <rect x="730" y="200" width="110" height="35" style="fill: #f0f0f0; stroke: #999; stroke-width: 1.5;" rx="4"/>
+    <text x="785" y="222" class="text-dark text-small">CV Baseline</text>
+
+    <!-- Addition -->
+    <circle cx="880" cy="175" r="20" style="fill: white; stroke: #555; stroke-width: 2;"/>
+    <text x="880" y="182" class="text-dark" style="font-size: 20px;">+</text>
+    <line x1="840" y1="155" x2="865" y2="167" class="arrow"/>
+    <line x1="840" y1="217" x2="865" y2="183" class="arrow"/>
+  </g>
+
+  <!-- OUTPUT -->
+  <g id="output">
+    <rect x="920" y="150" width="60" height="50" class="output-box" rx="4"/>
+    <text x="950" y="168" class="text-light text-small">Predicted</text>
+    <text x="950" y="182" class="text-light text-small">Trajectory</text>
+    <text x="950" y="195" class="text-light text-small">(30×2)</text>
+    <line x1="900" y1="175" x2="920" y2="175" class="arrow"/>
+  </g>
+
+  <!-- OPTIONAL BRANCH (Structure Head) -->
+  <g id="optional-branch">
+    <line x1="650" y1="197" x2="650" y2="350" class="arrow dashed"/>
+    <rect x="595" y="350" width="110" height="45" style="fill: #f39c12; stroke: #d68910; stroke-width: 2;" rx="4"/>
+    <text x="650" y="368" class="text-light">Structure Head</text>
+    <text x="650" y="383" class="text-light text-small">(optional dual)</text>
+
+    <rect x="595" y="410" width="110" height="35" style="fill: #fef5e7; stroke: #d68910; stroke-width: 1.5;" rx="4"/>
+    <text x="650" y="425" class="text-dark text-small">Lane Logits</text>
+    <text x="650" y="438" class="text-dark text-small">(30×16)</text>
+    <line x1="650" y1="395" x2="650" y2="410" class="arrow dashed"/>
+  </g>
+
+  <!-- Legend -->
+  <g id="legend" transform="translate(20, 450)">
+    <text x="0" y="0" class="text-dark text-small" style="text-anchor: start;">Legend:</text>
+    <line x1="50" y1="-3" x2="80" y2="-3" class="arrow"/>
+    <text x="90" y="0" class="text-dark text-small" style="text-anchor: start;">Data flow</text>
+    <line x1="160" y1="-3" x2="190" y2="-3" class="arrow dashed"/>
+    <text x="200" y="0" class="text-dark text-small" style="text-anchor: start;">Optional branch</text>
+  </g>
+</svg>
