@@ -1,157 +1,143 @@
-# Lane Graph Conditioning for Trajectory Prediction
+# Local Lane Graph Conditioning for Trajectory Prediction
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
-**Local Lane Graph Conditioning as a General Inductive Bias for Trajectory Prediction**
-
-[[Paper]](https://obsicat.com/lane-conditioning.html)
-
-<p align="center">
-  <img src="figures/fig_architecture.png" alt="Architecture Overview" width="100%">
+<p align="left">
+<a href="https://obsicat.com/lane-conditioning.html">
+    <img src="https://img.shields.io/badge/Project_Page-obsicat.com-blue" /></a>
+<a href="https://obsicat.com/assets/lane-conditioning-paper.pdf">
+    <img src="https://img.shields.io/badge/Paper-PDF-b31b1b.svg?style=flat" /></a>
 </p>
 
-## Abstract
-
-We propose **lane graph conditioning**, a lightweight module that injects local lane topology into trajectory prediction models. Using a waterflow-inspired BFS algorithm, we extract lane features along each agent's heading direction and fuse them via a learned gate. The approach is architecture-agnostic and adds only +7.5% parameters while delivering up to **27% lower minADE** and **43% lower miss rate** on 8-second prediction horizons.
-
-## Key Results
-
-All experiments are conducted on the **Waymo Open Motion Dataset (WOMD) v1.1** with 89K signalized intersection scenes.
-
-| Setting | Metric | Baseline | Lane-Cond | Improvement |
-|---------|--------|----------|-----------|-------------|
-| 3s LSTM (3 seeds) | ADE | 0.559 +/- 0.007 | **0.507 +/- 0.011** | **+9.3%** (p=0.007) |
-| 8s LSTM K=6 (3 seeds) | minADE | 1.868 +/- 0.042 | **1.371 +/- 0.081** | **+26.7%** (p=0.003) |
-| 8s LSTM K=6 (3 seeds) | minFDE | 5.047 +/- 0.106 | **3.403 +/- 0.242** | **+32.6%** (p=0.004) |
-| 8s LSTM K=6 (seed 42) | MR@5m | 33.9% | **19.4%** | **+42.7%** |
-| 8s TF single (seed 42) | ADE | 4.859 | **3.303** | **+32.0%** |
-
-### Error Decomposition (8s, K=6)
-
-| Component | Baseline | Lane-Cond | Improvement |
-|-----------|----------|-----------|-------------|
-| Avg Longitudinal | 1.238 | 0.924 | +25.4% |
-| Avg Lateral | 0.919 | 0.675 | +26.5% |
-| Endpoint Longitudinal | 3.561 | 2.577 | +27.6% |
-| Endpoint Lateral | 2.687 | 1.867 | **+30.5%** |
+> **Local Lane Graph Conditioning as a General Inductive Bias for Trajectory Prediction: A Multi-Architecture Study on the Waymo Open Motion Dataset**
+> [Xingnan Zhou](https://obsicat.com), Ciprian Alecsandru
+> Department of Building, Civil and Environmental Engineering, Concordia University, Montreal
+> Submitted to MDPI Sustainability, 2026
 
 <p align="center">
-  <img src="figures/fig_waterflow_concept.png" alt="Waterflow BFS Lane Exploration" width="60%">
+  <img src="docs/project-page/assets/anim_scene_1_left_turn.gif" width="45%">
+  <img src="docs/project-page/assets/anim_scene_0_straight.gif" width="45%">
+</p>
+<p align="center"><em>Left turn (minADE: 8.95m → 3.09m) and straight-through (4.35m → 1.19m) — Baseline (left) vs Lane-Conditioned (right)</em></p>
+
+## Overview
+
+We propose a **waterflow lane graph extraction** method that constructs a local, ego-centric lane topology through breadth-first traversal of the HD map, and a lightweight lane encoder with **graph message passing** and **cross-attention fusion**. The module is architecture-agnostic and improves both LSTM and Transformer backbones.
+
+**Key results on 89,258 signal-controlled Waymo intersection scenarios** (3 seeds for multi-seed rows; statistical significance via paired *t*-test):
+
+| Setting | Model | minADE (m) | minFDE (m) | vs Baseline |
+|---------|-------|------------|------------|-------------|
+| 3 s, single-modal (3 seeds) | LSTM + Lane Cond. | **0.507 ± 0.011** | — | **+9.3%** ADE (*p* = 0.007) |
+| 8 s, single-modal (seed 42) | LSTM + Lane Cond. | **3.075** | **8.688** | **+18.7%** ADE |
+| 8 s, single-modal (seed 42) | Transformer + Lane Cond. | **3.303** | **8.956** | **+32.0%** ADE |
+| 8 s, *K* = 6 multi-modal (3 seeds) | LSTM + Lane Cond. | **1.371 ± 0.081** | **3.403 ± 0.242** | **+26.6%** / **+32.6%** / **+42.7%** (minADE / minFDE / MR@5m, *p* < 0.005) |
+
+Our lane-conditioned multi-modal LSTM reaches **minADE = 1.37 ± 0.08 m**, numerically comparable to the [Waymo official LSTM baseline](https://arxiv.org/abs/2104.10133) (1.34 m) that uses the full feature set — while using only 2D positions plus local lane features. Note that the task scopes differ (ego-only self-prediction vs.\ multi-agent marginal prediction), so this is a contextual reference rather than a like-for-like comparison.
+
+## Method
+
+<p align="center">
+  <img src="docs/project-page/assets/architecture.svg" width="80%">
 </p>
 
-## Installation
+1. **Waterflow Lane Graph Extraction** — 3-hop BFS from the ego lane, reducing graph size by ~80%
+2. **Graph Message Passing** — 2 rounds of lane feature propagation along connectivity edges
+3. **Cross-Attention Fusion** — Lane embeddings attend to trajectory features
+4. **CV-Residual Decoder** — Predicts residuals relative to constant-velocity baseline; K=6 heads for multi-modal
 
-```bash
-git clone https://github.com/Jynxzzz/scenario-dreamer-jynxzzz.git
-cd scenario-dreamer-jynxzzz
-pip install -r requirements.txt
+The lane module adds **fewer than 50K parameters (~8% overhead)** for LSTM, achieving a 26.6% minADE improvement at 8 s (3-seed mean, *p* = 0.003). A controlled full-graph ablation (nearest 64 lanes) confirms that topologically guided local selection outperforms brute-force spatial proximity by an additional **+11.4%** minADE.
+
+## Repository Structure
+
+```
+├── models/                  # Model definitions
+│   ├── lstm_baseline.py     # LSTM encoder-decoder baseline
+│   ├── lane_conditioned_lstm.py  # LSTM + lane conditioning
+│   ├── transformer_baseline.py   # Transformer baseline
+│   ├── transformer_lane_cond.py  # Transformer + lane conditioning
+│   ├── multimodal_lstm.py        # Multi-modal K=6 baseline
+│   ├── multimodal_lane_cond.py   # Multi-modal + lane conditioning
+│   └── flow_matching.py          # Flow matching (experimental)
+├── training/                # Training infrastructure
+│   ├── train.py             # Hydra-based entry point
+│   ├── lightning_module.py  # PyTorch Lightning module
+│   ├── multimodal_lightning_module.py
+│   └── metrics.py           # ADE, FDE, MR evaluation
+├── datasets/trajectory/     # Data loading
+│   ├── traj_dataset.py      # Dataset with lane graph loading
+│   └── lane_feature_utils.py
+├── tools/                   # Core utilities
+│   ├── lane_graph/          # Waterflow extraction & graph building
+│   ├── scene_loader.py      # Unified scene loading
+│   └── encoder/             # Trajectory & lane tokenization
+├── configs/                 # Hydra configs
+│   └── config.yaml          # Base configuration
+├── docs/project-page/       # Project page (obsicat.com)
+└── environment.yml          # Conda environment
 ```
 
-## Data Preparation
+## Setup
 
-This project uses the [Waymo Open Motion Dataset (WOMD) v1.1](https://waymo.com/open/download/).
+```bash
+git clone https://github.com/Jynxzzz/lane-graph-conditioning.git
+cd lane-graph-conditioning
 
-1. Download the WOMD v1.1 dataset from the official Waymo website.
-2. Extract trajectory data using the preprocessing scripts:
-   ```bash
-   # Preprocess raw Waymo data into trajectory format
-   python datasets/traj_dataset.py --data_dir /path/to/waymo_data --output_dir /path/to/processed
-   ```
-3. Update the `data_dir` field in the config files under `configs/` to point to your processed data directory.
+conda env create -f environment.yml
+conda activate scenario-dreamer
+```
+
+### Data
+
+This project uses the [Waymo Open Motion Dataset v1.1.0](https://waymo.com/open/). We preprocess scenes into per-scenario pickle files containing trajectory data, lane graphs, and traffic light states.
+
+```bash
+# Preprocess Waymo TFRecords (requires waymo-open-dataset-tf)
+bash data_processing/prepare_waymo_data_with_traffic_light.sh
+```
 
 ## Training
 
-### LSTM Baseline (3-second prediction)
 ```bash
-python training/train.py --config configs/lstm_baseline.yaml
+# LSTM Baseline (8s, single-modal)
+python training/train.py model.name=lstm_baseline data.future_len=80
+
+# LSTM + Lane Conditioning (8s, single-modal)
+python training/train.py model.name=lane_conditioned data.future_len=80
+
+# Multi-Modal K=6 Baseline (8s)
+python training/train.py model.name=multimodal_lstm_baseline data.future_len=80
+
+# Multi-Modal K=6 + Lane Conditioning (8s)
+python training/train.py model.name=multimodal_lane_cond data.future_len=80
+
+# Transformer + Lane Conditioning (8s)
+python training/train.py model.name=tf_lane_cond data.future_len=80
 ```
 
-### LSTM + Lane Conditioning (3-second prediction)
-```bash
-python training/train.py --config configs/lstm_lane_cond.yaml
-```
+All training uses PyTorch Lightning with cosine annealing LR. We recommend **100 epochs** — the lane-conditioned model converges slower but reaches a lower asymptote.
 
-### Multi-modal LSTM K=6 (8-second prediction)
-```bash
-python training/train.py --config configs/lstm_multimodal.yaml
-```
+## Error Decomposition
 
-### Multi-modal LSTM + Lane Conditioning K=6 (8-second prediction)
-```bash
-python training/train.py --config configs/lstm_multimodal_lane.yaml
-```
+| Component | Baseline (m) | Lane-Cond (m) | Improvement |
+|-----------|-------------|----------------|-------------|
+| Avg Longitudinal | 1.238 | 0.924 | +25.4% |
+| Avg Lateral | 0.919 | 0.675 | +26.5% |
+| Endpoint Longitudinal | 3.561 | 2.577 | +27.6% |
+| **Endpoint Lateral** | **2.687** | **1.867** | **+30.5%** |
 
-### Transformer Baseline (8-second prediction)
-```bash
-python training/train.py --config configs/tf_baseline.yaml
-```
+Lane conditioning provides balanced improvements across both error axes, with endpoint lateral error (+30.5%) showing the strongest gain.
 
-### Transformer + Lane Conditioning (8-second prediction)
-```bash
-python training/train.py --config configs/tf_lane_cond.yaml
-```
+## Acknowledgements
 
-## Evaluation
-
-Evaluation metrics (ADE, FDE, minADE, minFDE, MR@5m) are computed automatically at the end of each training run. To run evaluation separately:
-
-```bash
-python training/train.py --config configs/lstm_multimodal_lane.yaml --test_only --ckpt_path /path/to/checkpoint.ckpt
-```
-
-### Error Decomposition Analysis
-```bash
-python scripts/error_decomposition.py --baseline_dir /path/to/baseline/outputs --lane_cond_dir /path/to/lane_cond/outputs
-```
-
-### Generate Paper Figures
-```bash
-python scripts/generate_paper_figures.py --results_dir /path/to/results --output_dir figures/
-```
-
-## Project Structure
-
-```
-scenario-dreamer-jynxzzz/
-├── models/                      # Model architectures
-│   ├── lstm_baseline.py         # LSTM baseline encoder-decoder
-│   ├── lane_conditioned_lstm.py # LSTM + lane graph conditioning
-│   ├── multimodal_lstm.py       # Multi-modal LSTM (K=6, WTA loss)
-│   ├── multimodal_lane_cond.py  # Multi-modal LSTM + lane conditioning
-│   ├── transformer_baseline.py  # Transformer baseline
-│   └── transformer_lane_cond.py # Transformer + lane conditioning
-├── training/                    # Training infrastructure
-│   ├── train.py                 # Main training entry point
-│   ├── lightning_module.py      # PyTorch Lightning module (single-modal)
-│   ├── multimodal_lightning_module.py  # Multi-modal Lightning module
-│   └── metrics.py               # ADE, FDE, minADE, minFDE, MR computation
-├── datasets/                    # Data loading
-│   ├── traj_dataset.py          # Waymo trajectory dataset
-│   └── lane_feature_utils.py    # Lane feature extraction utilities
-├── tools/lane_graph/            # Lane graph extraction
-│   ├── lane_explorer.py         # Waterflow BFS lane graph algorithm
-│   └── lane_graph_builder.py    # Lane graph construction
-├── configs/                     # Training configurations
-├── scripts/                     # Analysis and visualization
-└── figures/                     # Paper figures
-```
+This project builds on the [Scenario Dreamer](https://github.com/RLuke22/scenario-dreamer-waymo) framework (CVPR 2025) for Waymo data processing.
 
 ## Citation
 
-If you find this work useful, please cite:
-
 ```bibtex
-@article{zhou2026lane,
-  title={Local Lane Graph Conditioning as a General Inductive Bias for Trajectory Prediction},
+@article{zhou2026lanegraph,
+  title={Local Lane Graph Conditioning as a General Inductive Bias for Trajectory Prediction: A Multi-Architecture Study on the Waymo Open Motion Dataset},
   author={Zhou, Xingnan and Alecsandru, Ciprian},
   journal={Sustainability},
   year={2026},
   publisher={MDPI}
 }
 ```
-
-## Acknowledgments
-
-Built upon the [Scenario Dreamer](https://github.com/ss-zheng/Scenario-Dreamer) framework.
