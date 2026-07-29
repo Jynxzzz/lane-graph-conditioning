@@ -28,10 +28,10 @@ We propose a **waterflow lane graph extraction** method that constructs a local,
 |---------|-------|------------|------------|-------------|
 | 3 s, single-modal (3 seeds) | LSTM + Lane Cond. | **0.507 ± 0.011** | — | **+9.3%** ADE (*p* = 0.007) |
 | 8 s, single-modal (seed 42) | LSTM + Lane Cond. | **3.075** | **8.688** | **+18.7%** ADE |
-| 8 s, single-modal (seed 42) | Transformer + Lane Cond. | **3.303** | **8.956** | **+32.0%** ADE |
+| 8 s, single-modal (3 seeds) | Transformer + Lane Cond. | **3.175 ± 0.140** | **8.744 ± 0.286** | **+26.8%** ADE (*p* = 0.030) |
 | 8 s, *K* = 6 multi-modal (3 seeds) | LSTM + Lane Cond. | **1.371 ± 0.081** | **3.403 ± 0.242** | **+26.6%** / **+32.6%** / **+42.7%** (minADE / minFDE / MR@5m, *p* < 0.005) |
 
-Our lane-conditioned multi-modal LSTM reaches **minADE = 1.37 ± 0.08 m**, numerically comparable to the [Waymo official LSTM baseline](https://arxiv.org/abs/2104.10133) (1.34 m) that uses the full feature set — while using only 2D positions plus local lane features. Note that the task scopes differ (ego-only self-prediction vs.\ multi-agent marginal prediction), so this is a contextual reference rather than a like-for-like comparison.
+Our lane-conditioned multi-modal LSTM reaches **minADE = 1.37 ± 0.08 m** using only 2D positions plus local lane features — errors of the same order of magnitude as [published LSTM baselines](https://arxiv.org/abs/2104.10133) that consume substantially richer inputs. **This is not a fair comparison and no equivalence is claimed**: our task is ego-vehicle self-prediction at signal-controlled intersections on a custom split, not the official multi-agent benchmark.
 
 ## Method
 
@@ -44,7 +44,7 @@ Our lane-conditioned multi-modal LSTM reaches **minADE = 1.37 ± 0.08 m**, numer
 3. **Cross-Attention Fusion** — Lane embeddings attend to trajectory features
 4. **CV-Residual Decoder** — Predicts residuals relative to constant-velocity baseline; K=6 heads for multi-modal
 
-The lane module adds **fewer than 50K parameters (~8% overhead)** for LSTM, achieving a 26.6% minADE improvement at 8 s (3-seed mean, *p* = 0.003). A controlled full-graph ablation (nearest 64 lanes) confirms that topologically guided local selection outperforms brute-force spatial proximity by an additional **+11.4%** minADE.
+The lane module adds **fewer than 50K parameters (~8% overhead)** for LSTM, achieving a 26.6% minADE improvement at 8 s (3-seed mean, *p* = 0.003). A controlled full-graph ablation (nearest 64 lanes) shows a consistent trend favouring topologically guided local selection over brute-force spatial proximity (**+11.4%** minADE, *p* = 0.063, not statistically significant); a 2×2 decoupling ablation attributes ~70% of this gap to lane selection and ~30% to adjacency density.
 
 ## Repository Structure
 
