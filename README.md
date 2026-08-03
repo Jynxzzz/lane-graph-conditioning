@@ -3,8 +3,7 @@
 <p align="left">
 <a href="https://obsicat.com/lane-conditioning.html">
     <img src="https://img.shields.io/badge/Project_Page-obsicat.com-blue" /></a>
-<a href="https://obsicat.com/assets/lane-conditioning-paper.pdf">
-    <img src="https://img.shields.io/badge/Paper-PDF-b31b1b.svg?style=flat" /></a>
+<img src="https://img.shields.io/badge/Paper-Under_Review_at_Sustainability_(MDPI)-b31b1b.svg?style=flat" />
 </p>
 
 > **Local Lane Graph Conditioning as a General Inductive Bias for Trajectory Prediction: A Multi-Architecture Study on the Waymo Open Motion Dataset**
