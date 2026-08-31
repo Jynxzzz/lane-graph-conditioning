@@ -3,13 +3,16 @@
 <p align="left">
 <a href="https://obsicat.com/lane-conditioning.html">
     <img src="https://img.shields.io/badge/Project_Page-obsicat.com-blue" /></a>
-<img src="https://img.shields.io/badge/Paper-Under_Review_at_Sustainability_(MDPI)-b31b1b.svg?style=flat" />
+<a href="https://doi.org/10.3390/su18178787">
+    <img src="https://img.shields.io/badge/DOI-10.3390%2Fsu18178787-b31b1b.svg?style=flat" /></a>
+<a href="https://www.mdpi.com/2071-1050/18/17/8787">
+    <img src="https://img.shields.io/badge/Sustainability-Open_Access-green.svg?style=flat" /></a>
 </p>
 
 > **Local Lane Graph Conditioning as a General Inductive Bias for Trajectory Prediction: A Multi-Architecture Study on the Waymo Open Motion Dataset**
 > [Xingnan Zhou](https://obsicat.com), Ciprian Alecsandru
 > Department of Building, Civil and Environmental Engineering, Concordia University, Montreal
-> Submitted to MDPI Sustainability, 2026
+> *Sustainability* (MDPI), 2026, 18(17), 8787 — Open Access (CC BY 4.0). [Paper](https://www.mdpi.com/2071-1050/18/17/8787) · [PDF](https://www.mdpi.com/2071-1050/18/17/8787/pdf)
 
 <p align="center">
   <img src="docs/project-page/assets/anim_scene_1_left_turn.gif" width="45%">
@@ -137,6 +140,11 @@ This project builds on the [Scenario Dreamer](https://github.com/RLuke22/scenari
   author={Zhou, Xingnan and Alecsandru, Ciprian},
   journal={Sustainability},
   year={2026},
+  volume={18},
+  number={17},
+  pages={8787},
+  doi={10.3390/su18178787},
+  url={https://www.mdpi.com/2071-1050/18/17/8787},
   publisher={MDPI}
 }
 ```
